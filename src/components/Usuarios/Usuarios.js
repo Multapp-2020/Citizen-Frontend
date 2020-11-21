@@ -124,6 +124,8 @@ class Usuarios extends Component {
 
         const theme = createMuiTheme();
 
+        console.log(this.props)
+
         return (
             <Fragment>
                 <Container maxWidth="lg" style={{minHeight: "100vh"}}>

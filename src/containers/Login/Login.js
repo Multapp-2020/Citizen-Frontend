@@ -5,8 +5,12 @@ import { login, recuperarContrasena } from "../../store/actions/login";
 import { connect } from "react-redux";
 import { traducirError } from "../../share/traducirError";
 import { Redirect, withRouter } from "react-router";
+// BETO
+import { abrirDialogEditar, cerrarDialogEditar } from "../../store/actions/editarUsuario";
+import CrearUsuario from '../../components/CrearUsuario/CrearUsuario';
 
 class Login extends Component {
+
     state = {
         email: "",
         contrasena: "",
@@ -48,6 +52,7 @@ class Login extends Component {
     }
 
     render() {
+        console.log(this.props)
         const iniciarSesion = (
             <Fragment>
                 <Grid item={true} xs={12}>
@@ -87,6 +92,13 @@ class Login extends Component {
                         onClick={this.olvidarContrasenaHandler}
                     >
                         Olvidé mi contraseña
+                    </Button>
+                    <Button
+                        fullWidth={true}
+                        color="primary"
+                        onClick={this.props.abrirDialogEditar}
+                    >
+                        Regístrate
                     </Button>
                 </Grid>
             </Fragment>
@@ -135,7 +147,7 @@ class Login extends Component {
         if (localStorage.getItem("idToken")) {
             redirect = <Redirect to="/" />
         }
-        
+
         return (
             <div style={this.estilos.container}>
                 <a href="http://www.freepik.com" style={this.estilos.imageAuthor}>
@@ -163,6 +175,7 @@ class Login extends Component {
                                 : null}
                                 {this.state.mostrarIniciarSesion ? iniciarSesion : recuperarContrasena}
                             </Grid>
+                            <CrearUsuario open={this.props.mostrarDialogEditar} onClose={this.props.cerrarDialogEditar} editar={false} />
                         </Paper>
                     </Grid>
                 </Grid>
@@ -177,6 +190,7 @@ const mapStateToProps = state => {
         cargando: state.login.cargando,
         error: state.login.error,
         textoDeError: state.login.textoDeError,
+        mostrarDialogEditar: state.editarUsuario.mostrarDialog,
     }
 }
 
@@ -184,6 +198,8 @@ const mapDispatchToProps = dispatch => {
     return {
         login: (email, contrasena) => {dispatch(login(email, contrasena))},
         recuperarContrasena: (email) => {dispatch(recuperarContrasena(email))},
+        abrirDialogEditar: () => {dispatch(abrirDialogEditar())},
+        cerrarDialogEditar: () => {dispatch(cerrarDialogEditar())},
     }
 }
 
