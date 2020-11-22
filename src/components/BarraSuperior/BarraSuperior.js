@@ -57,8 +57,7 @@ const BarraSuperior = props => {
                     <Avatar className={estilos.avatar} src={localStorage.getItem("photoURL")} alt={localStorage.getItem("displayName")} />
                 </IconButton>
                 <Menu id="menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={cerrarMenuHandler}>
-                    <MenuItem onClick={multasHandler}>Administrar multas</MenuItem>
-                    <MenuItem onClick={usuariosHandler}>Administrar usuarios</MenuItem>
+                    <MenuItem onClick={multasHandler}>Mis Multas</MenuItem>
                     <MenuItem onClick={perfilHandler}>Mi perfil</MenuItem>
                     <MenuItem onClick={cerrarSesionHandler}>Cerrar sesión</MenuItem>
                 </Menu>

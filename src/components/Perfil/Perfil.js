@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import {Button, Avatar, List, ListItemIcon, ListItem, ListItemText, CircularProgress, Container, Typography, Grid, Divider} from "@material-ui/core";
-import {Email, Home, Phone, Fingerprint, Event, Wc, LocationCity, LocationOn} from "@material-ui/icons";
+import {Email, Home, Phone, Fingerprint, Event, Wc, LocationCity, LocationOn, DriveEta} from "@material-ui/icons";
 import CambiarContrasena from "../CambiarContrasena/CambiarContrasena";
 import { connect } from "react-redux";
 import { abrirDialogCambiarContrasena, cerrarDialogCambiarContrasena } from "../../store/actions/cambiarContrasena";
@@ -56,6 +56,13 @@ class Perfil extends Component {
                                             <Wc />
                                         </ListItemIcon>
                                         <ListItemText primary="Sexo" secondary={this.props.datos.sexo} />
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <DriveEta />
+                                        </ListItemIcon>
+                                        <ListItemText primary="Patentes" secondary={this.props.datos.patentes} />
                                     </ListItem>
                                     <Divider />
                                 </List>

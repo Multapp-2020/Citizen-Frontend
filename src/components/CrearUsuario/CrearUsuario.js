@@ -23,6 +23,7 @@ const EditarUsuario = props => {
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
     const [foto, setFoto] = useState([]);
+    const [patentes, setPatentes] = useState([]);
     const [aceptable, setAceptable] = useState(false);
 
     const estilos = useStyles();
@@ -44,6 +45,7 @@ const EditarUsuario = props => {
             setProvincia(props.usuario.provincia);
             setEmail(props.usuario.email);
             setTelefono(props.usuario.telefono);
+            setPatentes(props.usuario.patentes);
         }
         else {
             setRol("Ciudadano");
@@ -60,6 +62,7 @@ const EditarUsuario = props => {
             setProvincia("");
             setEmail("");
             setTelefono("");
+            setPatentes([]);
             setFoto([]);
         }
     }, [props.mostrarDialog, props.editar]);
@@ -118,6 +121,7 @@ const EditarUsuario = props => {
             departamento: departamento,
             localidad: localidad,
             provincia: provincia,
+            patentes: patentes
         };
         let id = props.editar ? props.usuario.id : "";
         props.editarUsuario(id, usuario, props.editar);
@@ -131,16 +135,28 @@ const EditarUsuario = props => {
             <DialogContent>
                 <DialogContentText>* Campos obligatorios. Pase el cursor sobre algunos campos para más información.</DialogContentText>
                 <Grid container={true} spacing={2}>
-                    <Grid item={true} xs={12}>
-                        {/* <FormControl required={true} fullWidth={true}>
-                            <InputLabel>Rol</InputLabel>
+                    {/* <Grid item={true} xs={12}>
+                        <FormControl required={true} fullWidth={true}>
+                            <InputLabel>Patentes</InputLabel>
                             <Select id="rol" value={rol} onChange={selectHandler}>
                                 <MenuItem value="Administrador">Administrador</MenuItem>
                                 <MenuItem value="Inspector">Inspector</MenuItem>
                                 <MenuItem value="Supervisor">Supervisor</MenuItem>
                                 <MenuItem value="Supervisor">Ciudadano</MenuItem>
                             </Select>
-                        </FormControl> */}
+                        </FormControl>
+                    </Grid> */}
+                    <Grid item={true} xs={12}>
+                        <FormControl required={true} fullWidth={true}>
+                            <TextField
+                                id="patentes"
+                                type="text"
+                                label="Patentes"
+                                required={true}
+                                value={patentes}
+                                onChange={event => setPatentes(event.target.value)}
+                            />
+                        </FormControl>
                     </Grid>
                     <Grid item={true} xs={4}>
                         <FormControl fullWidth={true}>
