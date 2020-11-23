@@ -24,6 +24,7 @@ const EditarUsuario = props => {
     const [telefono, setTelefono] = useState("");
     const [foto, setFoto] = useState([]);
     const [patentes, setPatentes] = useState([]);
+    const [unaPatente, setUnaPatente] = useState("");
     const [aceptable, setAceptable] = useState(false);
 
     const estilos = useStyles();
@@ -46,6 +47,7 @@ const EditarUsuario = props => {
             setEmail(props.usuario.email);
             setTelefono(props.usuario.telefono);
             setPatentes(props.usuario.patentes);
+            setUnaPatente(props.usuario.unaPatente);
         }
         else {
             setRol("Ciudadano");
@@ -63,6 +65,7 @@ const EditarUsuario = props => {
             setEmail("");
             setTelefono("");
             setPatentes([]);
+            setUnaPatente("");
             setFoto([]);
         }
     }, [props.mostrarDialog, props.editar]);
@@ -103,6 +106,15 @@ const EditarUsuario = props => {
         setFoto(files[0]);
     }
 
+    // Agrega una patente al array que se enviará al backend
+    const unaPatenteHandler = () => {
+        setPatentes([
+            ...patentes,
+            unaPatente
+        ]);
+        setUnaPatente("");
+    }
+
     // ejecuta la action para mandar todo al backend
     const editarUsuarioHandler = () => {
         const usuario = {
@@ -135,18 +147,21 @@ const EditarUsuario = props => {
             <DialogContent>
                 <DialogContentText>* Campos obligatorios. Pase el cursor sobre algunos campos para más información.</DialogContentText>
                 <Grid container={true} spacing={2}>
-                    {/* <Grid item={true} xs={12}>
-                        <FormControl required={true} fullWidth={true}>
-                            <InputLabel>Patentes</InputLabel>
-                            <Select id="rol" value={rol} onChange={selectHandler}>
-                                <MenuItem value="Administrador">Administrador</MenuItem>
-                                <MenuItem value="Inspector">Inspector</MenuItem>
-                                <MenuItem value="Supervisor">Supervisor</MenuItem>
-                                <MenuItem value="Supervisor">Ciudadano</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid> */}
                     <Grid item={true} xs={12}>
+                        <FormControl>
+                            <Tooltip title="La patente consta de 3 letras en mayúscula seguidas de 3 números. Se debe agregar como mínimo una patente, y como máximo se permiten 5">
+                                <TextField
+                                    id="patente"
+                                    type="text"
+                                    label="Patente"
+                                    value={unaPatente}
+                                    onChange={event => setUnaPatente(event.target.value)}
+                                />
+                            </Tooltip>
+                            <Button color="primary" onClick={unaPatenteHandler} disabled={patentes.length > 4}>
+                                Agregar  
+                            </Button>
+                        </FormControl>
                         <FormControl required={true} fullWidth={true}>
                             <TextField
                                 id="patentes"
@@ -154,6 +169,7 @@ const EditarUsuario = props => {
                                 label="Patentes"
                                 required={true}
                                 value={patentes}
+                                disabled={true}
                                 onChange={event => setPatentes(event.target.value)}
                             />
                         </FormControl>
