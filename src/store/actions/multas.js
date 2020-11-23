@@ -17,12 +17,17 @@ const cargarMultasConError = (error) => {
 }
 
 export const cargarMultas = () => {
-    const headers = {
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+    const params = {
+        headers: {
+            "content-type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+        params: {
+            uid: localStorage.getItem("uid"),
+        },
     };
     return dispatch => {
-        Axios.get("/getMultas", headers)
+        Axios.get("/multas-by-user", params)
             .then(response => {
                 console.log(response);
                 dispatch(cargarMultasConExito(response.data));
