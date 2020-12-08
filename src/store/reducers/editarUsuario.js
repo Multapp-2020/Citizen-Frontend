@@ -62,7 +62,7 @@ const reducer = (state = initialState, action) => {
             console.log('ENTRA AL REDUCER')
             return {
                 ...state,
-                patentes: state.patentes.concat(action.data)
+                patentes: action.data
             };
         default:
             return state;

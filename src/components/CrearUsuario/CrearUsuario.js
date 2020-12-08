@@ -11,8 +11,6 @@ import EditarPatentes from '../EditarPatentes/EditarPatentes';
 
 const CrearUsuario = props => {
 
-    console.log(props);
-
     const [rol, setRol] = useState("Ciudadano");
     const [dni, setDni] = useState("");
     const [apellido, setApellido] = useState("");
@@ -34,6 +32,13 @@ const CrearUsuario = props => {
 
     const estilos = useStyles();
 
+    console.log('SE VAN A LOGUEAR LAS PROPS DE CREARUSUARIO.JS');
+    console.log(props);
+    console.log('SE VA A LOGUEAR EL CONTENIDO DE PATENTES');
+    console.log(patentes);
+    console.log('SE VA A LOGUEAR EL CONTENIDO DE PROPS.PATENTES');
+    console.log(props.patentes);
+
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
         if (props.editar) {
@@ -51,7 +56,7 @@ const CrearUsuario = props => {
             setProvincia(props.usuario.provincia);
             setEmail(props.usuario.email);
             setTelefono(props.usuario.telefono);
-            setPatentes(props.usuario.patentes);
+            setPatentes(props.patentes);
             setUnaPatente(props.usuario.unaPatente);
         }
         else {
@@ -69,11 +74,11 @@ const CrearUsuario = props => {
             setProvincia("");
             setEmail("");
             setTelefono("");
-            setPatentes([]);
+            setPatentes(props.patentes);
             setUnaPatente("");
             setFoto([]);
         }
-    }, [props.mostrarDialog, props.editar]);
+    }, [props.mostrarDialog, props.editar, props.patentes]);
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
@@ -131,7 +136,6 @@ const CrearUsuario = props => {
         // this.setState({mostrarDialogPatente: true});
         // this.state.mostrarDialogPatente = true;
         props.abrirDialogPatentes();
-        console.log(props);
         return
     }
 
@@ -194,7 +198,7 @@ const CrearUsuario = props => {
                                 disabled={true}
                                 onChange={event => setPatentes(event.target.value)}
                             />
-                            <Button color="primary" onClick={editarPatentesHandler} disabled={patentes.length > 4}>
+                            <Button color="primary" onClick={editarPatentesHandler}>
                                 Editar  
                             </Button>
                         </FormControl>
@@ -355,6 +359,7 @@ const mapStateToProps = state => {
         error: state.editarUsuario.error,
         textoDeError: state.editarUsuario.textoDeError,
         mostrarDialogPatente: state.editarUsuario.mostrarDialogPatente,
+        patentes: state.editarUsuario.patentes
     }
 }
 

@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, R
 import { Add, Delete, Edit } from "@material-ui/icons";
 import { DropzoneArea } from "material-ui-dropzone";
 import { connect } from "react-redux";
-import { editarUsuario, addPatente } from "../../store/actions/editarUsuario";
+import { editarUsuario, addPatente, abrirDialogPatentes, cerrarDialogPatentes } from "../../store/actions/editarUsuario";
 import { withSnackbar } from "notistack";
 import Notifier from "../Notifier/Notifier";
 import useStyles from "../../share/useStyles";
@@ -111,6 +111,7 @@ const EditarPatentes = props => {
         let id = props.editar ? props.usuario.id : ""; */
         // props.editarUsuario(id, usuario, props.editar);
         props.addPatente(patentes);
+        props.cerrarDialogPatentes();
     }
 
     const theme = createMuiTheme();
@@ -120,8 +121,6 @@ const EditarPatentes = props => {
             ...patentes,
             null
         ]);
-        console.log('SE VA A LOGUEAR PATENTES');
-        console.log(patentes);
     }
 
     const handlePatenteChange = (index, value) => {
@@ -130,8 +129,6 @@ const EditarPatentes = props => {
         const copy = [...patentes];
         copy[index] = value;
         setPatentes(copy);
-        console.log('SE VA A LOGUEAR PATENTES');
-        console.log(patentes);
         /* const bool = validForm();
         if (aceptable !== bool) {
             setAceptable(bool);
@@ -144,14 +141,10 @@ const EditarPatentes = props => {
         const copy = [...patentes];
         copy.splice(index, 1);
         setPatentes(copy);
-        console.log('SE VA A LOGUEAR PATENTES');
-        console.log(patentes);
     }
 
     const validForm = () => {
         const bool = hasDuplicates(patentes);
-        console.log('SE VA A LOGUEAR hasDuplicates');
-        console.log(bool);
         if (bool) {
             return false
         }
@@ -162,9 +155,6 @@ const EditarPatentes = props => {
             if (patentes[i].length !== 6){
                 return false;
             }
-            /* if ((patentes[i] === patentes[patentes.indexOf(patentes[i])]) && (i !== patentes.indexOf(patentes[i])) ) {
-                return false
-            } */
         }
         return true;
     }
@@ -238,6 +228,8 @@ const mapDispatchToProps = dispatch => {
     return {
         editarUsuario: (id, usuario, editar) => {dispatch(editarUsuario(id, usuario, editar))},
         addPatente: (listaPatentes) => {dispatch(addPatente(listaPatentes))},
+        abrirDialogPatentes: () => {dispatch(abrirDialogPatentes())},
+        cerrarDialogPatentes: () => {dispatch(cerrarDialogPatentes())},
     }
 }
 
