@@ -20,7 +20,7 @@ import editarUsuarioReducer from "./store/reducers/editarUsuario";
 import eliminarUsuarioReducer from "./store/reducers/eliminarUsuario";
 import usuarioReducer from "./store/reducers/usuario";
 
-Axios.defaults.baseURL = "http://localhost:4000/api"; // esto es para usar la misma url en todas las peticiones http sin tener que andar escribiendo
+Axios.defaults.baseURL = "http://localhost:5000/api"; // esto es para usar la misma url en todas las peticiones http sin tener que andar escribiendo
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

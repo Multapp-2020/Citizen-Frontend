@@ -5,7 +5,6 @@ import { login, recuperarContrasena } from "../../store/actions/login";
 import { connect } from "react-redux";
 import { traducirError } from "../../share/traducirError";
 import { Redirect, withRouter } from "react-router";
-// BETO
 import { abrirDialogEditar, cerrarDialogEditar } from "../../store/actions/editarUsuario";
 import CrearUsuario from '../../components/CrearUsuario/CrearUsuario';
 

@@ -6,8 +6,13 @@ import { editarUsuario } from "../../store/actions/editarUsuario";
 import { withSnackbar } from "notistack";
 import Notifier from "../Notifier/Notifier";
 import useStyles from "../../share/useStyles";
+import { abrirDialogPatentes, cerrarDialogPatentes } from "../../store/actions/editarUsuario";
+import EditarPatentes from '../EditarPatentes/EditarPatentes';
 
-const EditarUsuario = props => {
+const CrearUsuario = props => {
+
+    console.log(props);
+
     const [rol, setRol] = useState("Ciudadano");
     const [dni, setDni] = useState("");
     const [apellido, setApellido] = useState("");
@@ -115,6 +120,21 @@ const EditarUsuario = props => {
         setUnaPatente("");
     }
 
+    const editarPatentesHandler = () => {
+        // props.mostrarDialogPatente = true;
+        /* this.setState((state) => {
+            return {
+                ...state,
+                mostrarDialogPatente: true
+            }
+        }); */
+        // this.setState({mostrarDialogPatente: true});
+        // this.state.mostrarDialogPatente = true;
+        props.abrirDialogPatentes();
+        console.log(props);
+        return
+    }
+
     // ejecuta la action para mandar todo al backend
     const editarUsuarioHandler = () => {
         const usuario = {
@@ -138,7 +158,6 @@ const EditarUsuario = props => {
         let id = props.editar ? props.usuario.id : "";
         props.editarUsuario(id, usuario, props.editar);
     }
-
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xl" fullWidth={true}>
             <DialogTitle>
@@ -148,7 +167,7 @@ const EditarUsuario = props => {
                 <DialogContentText>* Campos obligatorios. Pase el cursor sobre algunos campos para más información.</DialogContentText>
                 <Grid container={true} spacing={2}>
                     <Grid item={true} xs={12}>
-                        <FormControl>
+                        {/* <FormControl>
                             <Tooltip title="La patente consta de 3 letras en mayúscula seguidas de 3 números. Se debe agregar como mínimo una patente, y como máximo se permiten 5">
                                 <TextField
                                     id="patente"
@@ -161,7 +180,10 @@ const EditarUsuario = props => {
                             <Button color="primary" onClick={unaPatenteHandler} disabled={patentes.length > 4}>
                                 Agregar  
                             </Button>
-                        </FormControl>
+                            <Button color="primary" onClick={editarPatentesHandler} disabled={patentes.length > 4}>
+                                Editar  
+                            </Button>
+                        </FormControl> */}
                         <FormControl required={true} fullWidth={true}>
                             <TextField
                                 id="patentes"
@@ -172,6 +194,9 @@ const EditarUsuario = props => {
                                 disabled={true}
                                 onChange={event => setPatentes(event.target.value)}
                             />
+                            <Button color="primary" onClick={editarPatentesHandler} disabled={patentes.length > 4}>
+                                Editar  
+                            </Button>
                         </FormControl>
                     </Grid>
                     <Grid item={true} xs={4}>
@@ -305,6 +330,7 @@ const EditarUsuario = props => {
                                 onChange={imageUploadHandler.bind(this)}
                             />
                         </FormControl>
+                        <EditarPatentes open={props.mostrarDialogPatente} onClose={props.cerrarDialogPatentes} editar={false} />
                     </Grid>
                 </Grid>
             </DialogContent>
@@ -328,13 +354,16 @@ const mapStateToProps = state => {
         exito: state.editarUsuario.exito,
         error: state.editarUsuario.error,
         textoDeError: state.editarUsuario.textoDeError,
+        mostrarDialogPatente: state.editarUsuario.mostrarDialogPatente,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         editarUsuario: (id, usuario, editar) => {dispatch(editarUsuario(id, usuario, editar))},
+        abrirDialogPatentes: () => {dispatch(abrirDialogPatentes())},
+        cerrarDialogPatentes: () => {dispatch(cerrarDialogPatentes())},
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withSnackbar(EditarUsuario));
+export default connect(mapStateToProps, mapDispatchToProps)(withSnackbar(CrearUsuario));

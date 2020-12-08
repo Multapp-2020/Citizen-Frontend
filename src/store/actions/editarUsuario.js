@@ -70,3 +70,22 @@ export const editarUsuario = (id, usuario, editar) => {
             });
     }
 }
+
+export const abrirDialogPatentes = () => {
+    return {
+        type: actionTypes.ABRIR_DIALOG_PATENTES,
+    }
+}
+
+export const cerrarDialogPatentes = () => {
+    return {
+        type: actionTypes.CERRAR_DIALOG_PATENTES,
+    }
+}
+
+export const addPatente = (listaPatentes) => {
+    return {
+        type: actionTypes.ADD_PATENTE,
+        data: listaPatentes
+    }
+}
