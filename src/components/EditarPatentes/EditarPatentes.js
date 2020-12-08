@@ -24,8 +24,8 @@ const EditarPatentes = props => {
     const [telefono, setTelefono] = useState("");
     const [foto, setFoto] = useState([]); */
     const [aceptable, setAceptable] = useState(false);
-    const [patentes, setPatentes] = useState([]);
-    const [singlePatente, setSinglePatente] = useState([null]);
+    const [patentes, setPatentes] = useState([null]);
+    const [singlePatente, setSinglePatente] = useState("");
 
     const estilos = useStyles();
 
@@ -70,8 +70,9 @@ const EditarPatentes = props => {
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
+        const bool = validForm();
         if (
-            patentes[0] !== null
+            bool
             /* patentes.trim() !== "" &&
             apellido.trim() !== "" &&
             nombre.trim() !== "" &&
@@ -91,8 +92,6 @@ const EditarPatentes = props => {
 
     // ejecuta la action para mandar todo al backend
     const editarUsuarioHandler = () => {
-        console.log('SE VA A LOGUEAR LA PATENTE')
-        console.log(patentes)
         /* const listaPatentes = {
             patente: patente,
             /* telefono: telefono,
@@ -115,7 +114,7 @@ const EditarPatentes = props => {
     }
 
     const theme = createMuiTheme();
-    
+
     const addFieldPatente = () => {
         setPatentes([
             ...patentes,
@@ -133,6 +132,10 @@ const EditarPatentes = props => {
         setPatentes(copy);
         console.log('SE VA A LOGUEAR PATENTES');
         console.log(patentes);
+        /* const bool = validForm();
+        if (aceptable !== bool) {
+            setAceptable(bool);
+        } */
     }
 
     const handlePatenteRemove = (index) => {
@@ -145,13 +148,38 @@ const EditarPatentes = props => {
         console.log(patentes);
     }
 
+    const validForm = () => {
+        const bool = hasDuplicates(patentes);
+        console.log('SE VA A LOGUEAR hasDuplicates');
+        console.log(bool);
+        if (bool) {
+            return false
+        }
+        for (let i=0; i<patentes.length; i++){
+            if (patentes[i] === null) {
+                return false;
+            }
+            if (patentes[i].length !== 6){
+                return false;
+            }
+            /* if ((patentes[i] === patentes[patentes.indexOf(patentes[i])]) && (i !== patentes.indexOf(patentes[i])) ) {
+                return false
+            } */
+        }
+        return true;
+    }
+
+    const hasDuplicates = (array) => {
+        return (new Set(array)).size !== array.length;
+    }
+
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xs">
             <DialogTitle>
                 {props.editar ? "Editar usuario " : "Editar Patentes"}
             </DialogTitle>
             <DialogContent>
-                <DialogContentText>* Campos obligatorios.</DialogContentText>
+                <DialogContentText>* Campos obligatorios. No se pueden ingresar patentes iguales.</DialogContentText>
                 <Grid container={true} spacing={2}>
                     <Grid item={true} xs={8}>
                         { patentes.map( (pat, index) => {
