@@ -34,25 +34,27 @@ const CrearUsuario = props => {
 
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
-        if (props.editar) {
-            setRol(props.usuario.rol);
-            setDni(props.usuario.dni);
-            setApellido(props.usuario.apellido);
-            setNombre(props.usuario.nombre);
-            setFechaNacimiento(props.usuario.fechaNacimiento);
-            setSexo(props.usuario.sexo);
-            setCalle(props.usuario.calle);
-            setNumero(props.usuario.numero);
-            setPiso(props.usuario.piso);
-            setDepartamento(props.usuario.departamento);
-            setLocalidad(props.usuario.localidad);
-            setProvincia(props.usuario.provincia);
-            setEmail(props.usuario.email);
-            setTelefono(props.usuario.telefono);
-            setPatentes(props.patentes);
-            setUnaPatente(props.usuario.unaPatente);
+        if (props.mostrarDialogEditarPerfil) {
+            console.log('ENTRA EN EL USEEFFECT')
+            setRol(props.datos.rol);
+            setDni(props.datos.dni);
+            setApellido(props.datos.nombre.split(" ")[1]);
+            setNombre(props.datos.nombre.split(" ")[0]);
+            setFechaNacimiento(props.datos.fechaNacimiento);
+            setSexo(props.datos.sexo);
+            setCalle(props.datos.direccion);
+            setNumero(props.datos.numero);
+            setPiso(props.datos.piso);
+            setDepartamento(props.datos.departamento);
+            setLocalidad(props.datos.localidad);
+            setProvincia(props.datos.provincia);
+            setEmail(props.datos.email);
+            setTelefono(props.datos.telefono);
+            setPatentes(props.datos.patentes);
+            setUnaPatente(props.datos.unaPatente);
         }
         else {
+            console.log('ENTRA EN EL ELSE DEL USEEFFECT')
             setRol("Ciudadano");
             setDni("");
             setApellido("");
@@ -71,12 +73,11 @@ const CrearUsuario = props => {
             setUnaPatente("");
             setFoto([]);
         }
-    }, [props.mostrarDialog, props.editar, props.patentes]);
+    }, [props.mostrarDialog, props.editar, props.patentes, props.mostrarDialogEditarPerfil]);
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
         if (
-            rol.trim() !== "" &&
             dni.trim() !== "" &&
             apellido.trim() !== "" &&
             nombre.trim() !== "" &&
@@ -155,6 +156,10 @@ const CrearUsuario = props => {
         let id = props.editar ? props.usuario.id : "";
         props.editarUsuario(id, usuario, props.editar);
     }
+
+    console.log('SE VAN A LOGUEAR LAS PROPS DE CREARUSUARIO.JS');
+    console.log(props);
+
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xl" fullWidth={true}>
             <DialogTitle>
@@ -346,13 +351,15 @@ const CrearUsuario = props => {
 const mapStateToProps = state => {
     return {
         usuario: state.usuario.usuario,
+        datos: state.perfil.datos,
         mostrarDialog: state.editarUsuario.mostrarDialog,
         cargando: state.editarUsuario.cargando,
         exito: state.editarUsuario.exito,
         error: state.editarUsuario.error,
         textoDeError: state.editarUsuario.textoDeError,
         mostrarDialogPatente: state.editarUsuario.mostrarDialogPatente,
-        patentes: state.editarUsuario.patentes
+        patentes: state.editarUsuario.patentes,
+        mostrarDialogEditarPerfil: state.editarUsuario.mostrarDialogEditarPerfil,
     }
 }
 
