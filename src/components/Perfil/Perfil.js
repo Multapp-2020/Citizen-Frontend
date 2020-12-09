@@ -8,7 +8,7 @@ import { cargarPerfil } from "../../store/actions/perfil";
 import Notifier from "../Notifier/Notifier";
 //import EditarUsuario from "../EditarUsuario/EditarUsuario";
 import CrearUsuario from "../CrearUsuario/CrearUsuario";
-import { abrirDialogEditarPerfil, cerrarDialogEditarPerfil } from "../../store/actions/editarUsuario";
+import { abrirDialogEditarPerfil, cerrarDialogEditarPerfil, addPatente } from "../../store/actions/editarUsuario";
 
 class Perfil extends Component {
     componentDidMount = () => {
@@ -21,6 +21,12 @@ class Perfil extends Component {
         console.log(this.props);
 
         const theme = createMuiTheme();
+
+        const handleEditClick = () => {
+            this.props.abrirDialogEditarPerfil();
+            this.props.addPatente(this.props.datos.patentes);
+        }
+
         return (
             <Container>
                 {this.props.cargando ? <CircularProgress /> : null}
@@ -113,7 +119,7 @@ class Perfil extends Component {
                         </Grid>
                         <CambiarContrasena open={this.props.mostrarDialog} onClose={this.props.cerrarDialogCambiarContrasena} />
                         <Tooltip title="Editar datos" placement="left" arrow>
-                            <Fab color="primary" onClick={this.props.abrirDialogEditarPerfil} style={{position: "fixed", bottom: theme.spacing(5), right: theme.spacing(5)}}>
+                            <Fab color="primary" onClick={handleEditClick} style={{position: "fixed", bottom: theme.spacing(5), right: theme.spacing(5)}}>
                                 <Edit />
                             </Fab>
                         </Tooltip>
@@ -147,6 +153,7 @@ const mapDispatchToProps = dispatch => {
         cerrarDialogCambiarContrasena: () => dispatch(cerrarDialogCambiarContrasena()),
         abrirDialogEditarPerfil: () => {dispatch(abrirDialogEditarPerfil())},
         cerrarDialogEditarPerfil: () => {dispatch(cerrarDialogEditarPerfil())},
+        addPatente: (listaPatentes) => {dispatch(addPatente(listaPatentes))},
     }
 }
 

@@ -46,16 +46,30 @@ const EditarPatentes = props => {
             setProvincia(props.usuario.provincia);
             setEmail(props.usuario.email);
             setTelefono(props.usuario.telefono); */
-            setPatentes(props.datos.patentes.split(","));
-            setSinglePatente(props.usuario.patente);
+            // setPatentes(props.patentes.split(","));
+            // setSinglePatente(props.usuario.patente);
+            if ((typeof props.patentes) == "string"){
+                console.log(typeof props.patentes)
+                setPatentes(props.patentes.split(","));
+            } else {
+                console.log(typeof props.patentes)
+                setPatentes(props.patentes);
+            }
         }
         else {
             if (props.mostrarDialogPatente){
-                console.log('ENTRA EN EL MOSTRARDIALOGOPATENTE DEL USEEFFECT');
-                setPatentes(props.datos.patentes.split(","));
-                setSinglePatente(props.datos.patentes.split(","));
+                if ((typeof props.patentes) == "string"){
+                    console.log(typeof props.patentes)
+                    setPatentes(props.patentes.split(","));
+                } else {
+                    console.log(typeof props.patentes)
+                    setPatentes(props.patentes);
+                }
+                /* setPatentes(props.patentes);
+                console.log('SE VAN A LOGUEAR LAS PATENTES');
+                console.log(patentes); */
+                // setSinglePatente(props.datos.patentes.split(","));
             } else {
-                console.log('ENTRA EN EL ELSE DEL USEEFFECT');
                 /* setDni("");
                 setApellido("");
                 setNombre("");

@@ -49,7 +49,7 @@ const CrearUsuario = props => {
             setProvincia(props.datos.provincia);
             setEmail(props.datos.email);
             setTelefono(props.datos.telefono);
-            setPatentes(props.datos.patentes);
+            setPatentes(props.patentes);
             setUnaPatente(props.datos.unaPatente);
         }
         else {
@@ -67,7 +67,7 @@ const CrearUsuario = props => {
             setProvincia("");
             setEmail("");
             setTelefono("");
-            setPatentes([]);
+            setPatentes(props.patentes);
             setUnaPatente("");
             setFoto([]);
         }
