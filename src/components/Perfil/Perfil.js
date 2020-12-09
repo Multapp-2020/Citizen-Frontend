@@ -118,7 +118,7 @@ class Perfil extends Component {
                             </Fab>
                         </Tooltip>
                         {/* <EditarUsuario open={this.props.mostrarDialog} onClose={this.props.cerrarDialogEditarPerfil} editar={true} /> */}
-                        <CrearUsuario open={this.props.mostrarDialogEditarPerfil} onClose={this.props.cerrarDialogEditarPerfil}/>
+                        <CrearUsuario open={this.props.mostrarDialogEditarPerfil} onClose={this.props.cerrarDialogEditarPerfil} editar={true}/>
                     </Fragment>
                 : null}
                 <Notifier />

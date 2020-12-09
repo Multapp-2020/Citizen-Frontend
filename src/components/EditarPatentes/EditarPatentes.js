@@ -70,10 +70,8 @@ const EditarPatentes = props => {
                 setEmail("");
                 setTelefono("");
                 setFoto([]); */
-                setPatentes(props.datos.patentes.split(","));
+                setPatentes([null]);
                 setSinglePatente("");
-                console.log(patentes);
-                console.log(props.datos.patentes)
             }
         }
     }, [props.mostrarDialog, props.editar, props.mostrarDialogPatente]);

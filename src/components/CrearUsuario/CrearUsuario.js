@@ -34,7 +34,7 @@ const CrearUsuario = props => {
 
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
-        if (props.mostrarDialogEditarPerfil) {
+        if (props.editar) {
             setRol(props.datos.rol);
             setDni(props.datos.dni);
             setApellido(props.datos.nombre.split(" ")[1]);
@@ -151,7 +151,9 @@ const CrearUsuario = props => {
             provincia: provincia,
             patentes: patentes
         };
-        let id = props.editar ? props.usuario.id : "";
+        /* let id = props.editar ? props.usuario.id : "";
+        props.editarUsuario(id, usuario, props.editar); */
+        let id = localStorage.getItem("uid");
         props.editarUsuario(id, usuario, props.editar);
     }
 
