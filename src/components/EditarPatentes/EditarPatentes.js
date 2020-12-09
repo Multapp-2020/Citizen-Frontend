@@ -32,6 +32,7 @@ const EditarPatentes = props => {
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
         if (props.editar) {
+            console.log('ENTRA EN EL PROPS.EDITAR DEL USEEFFECT');
             /* setDni(props.usuario.dni);
             setApellido(props.usuario.apellido);
             setNombre(props.usuario.nombre);
@@ -45,28 +46,37 @@ const EditarPatentes = props => {
             setProvincia(props.usuario.provincia);
             setEmail(props.usuario.email);
             setTelefono(props.usuario.telefono); */
-            setPatentes(props.usuario.patente);
+            setPatentes(props.datos.patentes.split(","));
             setSinglePatente(props.usuario.patente);
         }
         else {
-            /* setDni("");
-            setApellido("");
-            setNombre("");
-            setFechaNacimiento(new Date().toISOString().slice(0, 10));
-            setSexo("Masculino");
-            setCalle("");
-            setNumero("");
-            setPiso("");
-            setDepartamento("");
-            setLocalidad("");
-            setProvincia("");
-            setEmail("");
-            setTelefono("");
-            setFoto([]); */
-            setPatentes([null]);
-            setSinglePatente("");
+            if (props.mostrarDialogPatente){
+                console.log('ENTRA EN EL MOSTRARDIALOGOPATENTE DEL USEEFFECT');
+                setPatentes(props.datos.patentes.split(","));
+                setSinglePatente(props.datos.patentes.split(","));
+            } else {
+                console.log('ENTRA EN EL ELSE DEL USEEFFECT');
+                /* setDni("");
+                setApellido("");
+                setNombre("");
+                setFechaNacimiento(new Date().toISOString().slice(0, 10));
+                setSexo("Masculino");
+                setCalle("");
+                setNumero("");
+                setPiso("");
+                setDepartamento("");
+                setLocalidad("");
+                setProvincia("");
+                setEmail("");
+                setTelefono("");
+                setFoto([]); */
+                setPatentes(props.datos.patentes.split(","));
+                setSinglePatente("");
+                console.log(patentes);
+                console.log(props.datos.patentes)
+            }
         }
-    }, [props.mostrarDialog, props.editar]);
+    }, [props.mostrarDialog, props.editar, props.mostrarDialogPatente]);
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
@@ -163,6 +173,9 @@ const EditarPatentes = props => {
         return (new Set(array)).size !== array.length;
     }
 
+    console.log('SE VAN A LOGUEAR LAS PROPS DE EDITARPATENTES.JS')
+    console.log(props);
+
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xs">
             <DialogTitle>
@@ -215,12 +228,14 @@ const EditarPatentes = props => {
 const mapStateToProps = state => {
     return {
         usuario: state.usuario.usuario,
+        datos: state.perfil.datos,
         mostrarDialog: state.editarUsuario.mostrarDialog,
         cargando: state.editarUsuario.cargando,
         exito: state.editarUsuario.exito,
         error: state.editarUsuario.error,
         textoDeError: state.editarUsuario.textoDeError,
-        patentes: state.editarUsuario.patentes
+        patentes: state.editarUsuario.patentes,
+        mostrarDialogPatente: state.editarUsuario.mostrarDialogPatente,
     }
 }
 

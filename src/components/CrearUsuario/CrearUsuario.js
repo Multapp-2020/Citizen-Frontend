@@ -35,7 +35,6 @@ const CrearUsuario = props => {
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
         if (props.mostrarDialogEditarPerfil) {
-            console.log('ENTRA EN EL USEEFFECT')
             setRol(props.datos.rol);
             setDni(props.datos.dni);
             setApellido(props.datos.nombre.split(" ")[1]);
@@ -54,7 +53,6 @@ const CrearUsuario = props => {
             setUnaPatente(props.datos.unaPatente);
         }
         else {
-            console.log('ENTRA EN EL ELSE DEL USEEFFECT')
             setRol("Ciudadano");
             setDni("");
             setApellido("");
@@ -69,7 +67,7 @@ const CrearUsuario = props => {
             setProvincia("");
             setEmail("");
             setTelefono("");
-            setPatentes(props.patentes);
+            setPatentes([]);
             setUnaPatente("");
             setFoto([]);
         }
