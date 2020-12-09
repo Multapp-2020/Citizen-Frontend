@@ -89,3 +89,15 @@ export const addPatente = (listaPatentes) => {
         data: listaPatentes
     }
 }
+
+export const abrirDialogEditarPerfil = () => {
+    return {
+        type: actionTypes.ABRIR_DIALOG_EDITAR_PERFIL,
+    }
+}
+
+export const cerrarDialogEditarPerfil = () => {
+    return {
+        type: actionTypes.CERRAR_DIALOG_EDITAR_PERFIL,
+    }
+}

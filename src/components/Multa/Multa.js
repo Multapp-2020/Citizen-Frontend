@@ -354,7 +354,7 @@ class Multa extends Component {
                                         </Grid>
                                     </Paper>
                                 </Grid>
-                                {this.props.multa.estado === "No resuelta" ?
+                                {/* {this.props.multa.estado === "No resuelta" ?
                                     <Fragment>
                                         <Grid item={true} xs={6}>
                                             <Button
@@ -381,7 +381,7 @@ class Multa extends Component {
                                             </Button>
                                         </Grid>
                                     </Fragment>
-                                : null}
+                                : null} */}
                             </Grid>
                         </Container>
                         <ResolverMulta

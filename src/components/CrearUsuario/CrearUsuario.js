@@ -32,13 +32,6 @@ const CrearUsuario = props => {
 
     const estilos = useStyles();
 
-    console.log('SE VAN A LOGUEAR LAS PROPS DE CREARUSUARIO.JS');
-    console.log(props);
-    console.log('SE VA A LOGUEAR EL CONTENIDO DE PATENTES');
-    console.log(patentes);
-    console.log('SE VA A LOGUEAR EL CONTENIDO DE PROPS.PATENTES');
-    console.log(props.patentes);
-
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
         if (props.editar) {

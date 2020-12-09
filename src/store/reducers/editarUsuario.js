@@ -8,6 +8,7 @@ const initialState = {
     error: false,
     textoDeError: "",
     patentes: [],
+    mostrarDialogEditarPerfil: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -59,10 +60,21 @@ const reducer = (state = initialState, action) => {
                 textoDeError: action.error.toString(),
             };
         case actionTypes.ADD_PATENTE:
-            console.log('ENTRA AL REDUCER')
             return {
                 ...state,
                 patentes: action.data
+            };
+        case actionTypes.ABRIR_DIALOG_EDITAR_PERFIL:
+            console.log('ENTRA AL REDUCER DE ABRIR')
+            return {
+                ...state,
+                mostrarDialogEditarPerfil: true
+            };
+        case actionTypes.CERRAR_DIALOG_EDITAR_PERFIL:
+            console.log('ENTRA AL REDUCER DE CERRAR')
+            return {
+                ...state,
+                mostrarDialogEditarPerfil: false
             };
         default:
             return state;
