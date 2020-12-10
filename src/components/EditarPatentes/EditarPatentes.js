@@ -105,8 +105,6 @@ const EditarPatentes = props => {
             if ((patentes[i].length < 6) || (patentes[i].length > 8)){
                 return false;
             }
-            console.log('RESULTADO DEL REGEX:');
-            console.log(regex.test(patentes[i]));
             if ((!(regex.test(patentes[i]))) && (!(regexNuevo.test(patentes[i])))) {
                 return false;
             }
@@ -124,21 +122,23 @@ const EditarPatentes = props => {
                 {props.editar ? "Editar usuario " : "Editar Patentes"}
             </DialogTitle>
             <DialogContent>
-                <DialogContentText>* Campos obligatorios. No se pueden ingresar patentes iguales.</DialogContentText>
+                <DialogContentText>* Campos obligatorios. No se pueden ingresar patentes iguales. Mínimo 1, máxmo 5.</DialogContentText>
                 <Grid container={true} spacing={2}>
                     <Grid item={true} xs={8}>
                         { patentes.map( (pat, index) => {
                             return (
                                 <FormControl fullWidth={true} key={index}>
                                     <ListItem>
-                                        <TextField
-                                            id={index}
-                                            type="text"
-                                            label="Patente"
-                                            required={true}
-                                            value={patentes[index]}
-                                            onChange={(event) => handlePatenteChange(index, event.target.value)}
-                                        />
+                                        <Tooltip title="Ejemplos de formatos permitidos: AAA000, AA000AB">
+                                            <TextField
+                                                id={index}
+                                                type="text"
+                                                label="Patente"
+                                                required={true}
+                                                value={patentes[index]}
+                                                onChange={(event) => handlePatenteChange(index, event.target.value)}
+                                            />
+                                        </Tooltip>
                                         <IconButton onClick={() => handlePatenteRemove(index)} disabled={patentes.length === 1}>
                                             <Delete />
                                         </IconButton>

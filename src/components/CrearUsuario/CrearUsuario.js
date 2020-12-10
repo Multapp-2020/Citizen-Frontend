@@ -193,15 +193,17 @@ const CrearUsuario = props => {
                 <Grid container={true} spacing={2}>
                     <Grid item={true} xs={12}>
                         <FormControl required={true} fullWidth={true}>
-                            <TextField
-                                id="patentes"
-                                type="text"
-                                label="Patentes"
-                                required={true}
-                                value={patentes}
-                                disabled={true}
-                                onChange={event => setPatentes(event.target.value)}
-                            />
+                            <Tooltip title="Pulse el botón Editar ubicado debajo de este campo para agregar o quitar patentes">
+                                <TextField
+                                    id="patentes"
+                                    type="text"
+                                    label="Patentes"
+                                    required={true}
+                                    value={patentes}
+                                    disabled={true}
+                                    onChange={event => setPatentes(event.target.value)}
+                                />
+                            </Tooltip>
                             <Button color="primary" onClick={editarPatentesHandler}>
                                 Editar  
                             </Button>
