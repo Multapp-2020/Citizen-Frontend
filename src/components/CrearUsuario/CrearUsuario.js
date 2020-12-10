@@ -6,8 +6,9 @@ import { editarUsuario } from "../../store/actions/editarUsuario";
 import { withSnackbar } from "notistack";
 import Notifier from "../Notifier/Notifier";
 import useStyles from "../../share/useStyles";
-import { abrirDialogPatentes, cerrarDialogPatentes } from "../../store/actions/editarUsuario";
+import { abrirDialogPatentes, cerrarDialogPatentes, cerrarDialogEditarPerfil } from "../../store/actions/editarUsuario";
 import EditarPatentes from '../EditarPatentes/EditarPatentes';
+import  { Redirect } from 'react-router-dom';
 
 const CrearUsuario = props => {
 
@@ -98,11 +99,6 @@ const CrearUsuario = props => {
         setSexo(event.target.value);
     }
 
-    // carga lo que selecciona el usuario en el select en el state
-    const selectHandler = (event) => {
-        setRol(event.target.value);
-    }
-
     // carga la foto subida en el state
     const imageUploadHandler = (files) => {
         setFoto(files[0]);
@@ -144,6 +140,12 @@ const CrearUsuario = props => {
         };
         let id = localStorage.getItem("uid");
         props.editarUsuario(id, usuario, props.editar);
+        /* if (props.editar){
+            // props.cerrarDialogEditarPerfil();
+            // return <Redirect to='/perfil'  />
+            
+            window.location.reload();
+        } */
     }
 
     return (
@@ -337,6 +339,7 @@ const mapDispatchToProps = dispatch => {
         editarUsuario: (id, usuario, editar) => {dispatch(editarUsuario(id, usuario, editar))},
         abrirDialogPatentes: () => {dispatch(abrirDialogPatentes())},
         cerrarDialogPatentes: () => {dispatch(cerrarDialogPatentes())},
+        cerrarDialogEditarPerfil: () => {dispatch(cerrarDialogEditarPerfil())},
     }
 }
 

@@ -23,6 +23,9 @@ class Perfil extends Component {
             this.props.addPatente(this.props.datos.patentes);
         }
 
+        console.log('PROPS DE PERFIL.JS');
+        console.log(this.props);
+
         return (
             <Container>
                 {this.props.cargando ? <CircularProgress /> : null}

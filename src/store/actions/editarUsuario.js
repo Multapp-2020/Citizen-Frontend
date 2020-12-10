@@ -57,13 +57,14 @@ export const editarUsuario = (id, usuario, editar) => {
                 dispatch(editarUsuarioConExito());
                 let texto = editar ? "Usuario actualizado exitosamente" : "Usuario creado exitosamente";
                 dispatch(enqueueSnackbar({message: texto, options: {variant: "success"}}));
-                if (editar) {
+                /* if (editar) {
                     dispatch(cargarUsuario(id));
                 }
                 else {
                     dispatch(cargarUsuarios());
-                }
-                dispatch(cerrarDialogEditar());
+                } */
+                dispatch(cargarUsuario(id));
+                dispatch(cerrarDialogEditarPerfil());
             }).catch(error => {
                 dispatch(editarUsuarioConError(error));
                 dispatch(enqueueSnackbar({message: traducirError(error.response.data.message), options: {variant: "error"}}));
