@@ -76,7 +76,11 @@ const CrearUsuario = props => {
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
-        if (
+        console.log('DATOS');
+        console.log(props.datos);
+        console.log('PATENTES');
+        console.log(props.patentes)
+        if ((
             dni.trim() !== "" &&
             apellido.trim() !== "" &&
             nombre.trim() !== "" &&
@@ -87,13 +91,13 @@ const CrearUsuario = props => {
             email.trim() !== "" &&
             telefono.trim() !== "" && 
             patentes.toString().trim() !== ""
-        ) {
+        ) && (props.datos.patentes !== patentes)) {
             setAceptable(true);
         }
         else {
             setAceptable(false);
         }
-    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono]);
+    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, patentes]);
 
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {
