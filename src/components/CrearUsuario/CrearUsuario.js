@@ -36,22 +36,22 @@ const CrearUsuario = props => {
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
         if (props.editar) {
-            setRol(props.datos.rol);
-            setDni(props.datos.dni);
-            setApellido(props.datos.nombre.split(" ")[1]);
-            setNombre(props.datos.nombre.split(" ")[0]);
-            setFechaNacimiento(props.datos.fechaNacimiento);
-            setSexo(props.datos.sexo);
-            setCalle(props.datos.direccion);
-            setNumero(props.datos.numero);
-            setPiso(props.datos.piso);
-            setDepartamento(props.datos.departamento);
-            setLocalidad(props.datos.localidad);
-            setProvincia(props.datos.provincia);
-            setEmail(props.datos.email);
-            setTelefono(props.datos.telefono);
+            setRol(props.usuario.rol);
+            setDni(props.usuario.dni);
+            setApellido(props.usuario.nombre.split(" ")[1]);
+            setNombre(props.usuario.nombre.split(" ")[0]);
+            setFechaNacimiento(props.usuario.fechaNacimiento);
+            setSexo(props.usuario.sexo);
+            setCalle(props.usuario.direccion);
+            setNumero(props.usuario.numero);
+            setPiso(props.usuario.piso);
+            setDepartamento(props.usuario.departamento);
+            setLocalidad(props.usuario.localidad);
+            setProvincia(props.usuario.provincia);
+            setEmail(props.usuario.email);
+            setTelefono(props.usuario.telefono);
             setPatentes(props.patentes);
-            setUnaPatente(props.datos.unaPatente);
+            setUnaPatente(props.usuario.unaPatente);
         }
         else {
             /* setRol("Ciudadano");
@@ -76,13 +76,13 @@ const CrearUsuario = props => {
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
-        console.log('DATOS');
-        console.log(props.datos);
+        /* console.log('DATOS');
+        console.log(props.usuario);
         console.log('PATENTES');
-        console.log(props.patentes)
+        console.log(props.patentes) */
         if ((
             dni.trim() !== "" &&
-            apellido.trim() !== "" &&
+            //apellido.trim() !== "" &&
             nombre.trim() !== "" &&
             fechaNacimiento.trim() !== "" &&
             calle.trim() !== "" &&
@@ -91,7 +91,7 @@ const CrearUsuario = props => {
             email.trim() !== "" &&
             telefono.trim() !== "" && 
             patentes.toString().trim() !== ""
-        ) && (props.datos.patentes !== patentes)) {
+        ) && (props.usuario.patentes !== patentes)) {
             setAceptable(true);
         }
         else {

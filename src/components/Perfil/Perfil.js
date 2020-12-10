@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 import {Button, Avatar, List, ListItemIcon, ListItem, ListItemText, CircularProgress, Container, Typography, Grid, Divider, Tooltip, Fab, createMuiTheme} from "@material-ui/core";
 import { Email, Home, Phone, Fingerprint, Event, Wc, LocationCity, LocationOn, DriveEta, Edit } from "@material-ui/icons";
 import CambiarContrasena from "../CambiarContrasena/CambiarContrasena";
@@ -8,11 +8,36 @@ import { cargarPerfil } from "../../store/actions/perfil";
 import Notifier from "../Notifier/Notifier";
 import CrearUsuario from "../CrearUsuario/CrearUsuario";
 import { abrirDialogEditarPerfil, cerrarDialogEditarPerfil, addPatente } from "../../store/actions/editarUsuario";
+import { cargarUsuario } from "../../store/actions/usuario";
 
 class Perfil extends Component {
+
+    
+
     componentDidMount = () => {
-        this.props.cargarPerfil();
+        /* if (this.props.datos !== null){
+            const id = localStorage.getItem("uid");
+            this.props.cargarUsuario(id);
+            this.props.cargarPerfil();
+        } else {
+            this.props.cargarPerfil();
+        } */
+        // setCargando(true);
+        // this.props.cargarPerfil();
+        const id = localStorage.getItem("uid");
+        this.props.cargarUsuario(id);
+
+        // this.props.cargarPerfil();
+
+        // setCargando(false);
+        /* const id = localStorage.getItem("uid");
+        this.props.cargarUsuario(id); */
     }
+
+    /* useEffect(() => {
+        const id = localStorage.getItem("uid");
+        this.props.cargarUsuario(id);
+    }, [this.props.mostrarDialog]); */
 
     render() {
 
@@ -20,7 +45,7 @@ class Perfil extends Component {
 
         const handleEditClick = () => {
             this.props.abrirDialogEditarPerfil();
-            this.props.addPatente(this.props.datos.patentes);
+            this.props.addPatente(this.props.usuario.patentes);
         }
 
         console.log('PROPS DE PERFIL.JS');
@@ -33,11 +58,11 @@ class Perfil extends Component {
                     <Fragment>
                         <Grid container={true} spacing={2}>
                             <Grid item={true} xs={12}>
-                                <Avatar style={{width: "200px", height: "200px"}} src={this.props.foto} alt={this.props.datos.nombre} />
+                                <Avatar style={{width: "200px", height: "200px"}} src={this.props.usuario.foto} alt={this.props.usuario.nombre} />
                             </Grid>
                             <Grid item={true} xs={12} style={{verticalAlign: "center"}}>
                                 <Typography variant="h2">
-                                    {this.props.datos.nombre}
+                                    {this.props.usuario.nombre}
                                 </Typography>
                                 {/* <Typography variant="h4">{this.props.datos.rol}</Typography> */}
                             </Grid>
@@ -47,35 +72,35 @@ class Perfil extends Component {
                                         <ListItemIcon>
                                             <Email />
                                         </ListItemIcon>
-                                        <ListItemText primary="Correo electrónico" secondary={this.props.datos.email} />
+                                        <ListItemText primary="Correo electrónico" secondary={this.props.usuario.email} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
                                         <ListItemIcon>
                                             <Fingerprint />
                                         </ListItemIcon>
-                                        <ListItemText primary="DNI" secondary={this.props.datos.dni} />
+                                        <ListItemText primary="DNI" secondary={this.props.usuario.dni} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
                                         <ListItemIcon>
                                             <Event />
                                         </ListItemIcon>
-                                        <ListItemText primary="Fecha de nacimiento" secondary={this.props.datos.fechaNacimiento} />
+                                        <ListItemText primary="Fecha de nacimiento" secondary={this.props.usuario.fechaNacimiento} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
                                         <ListItemIcon>
                                             <Wc />
                                         </ListItemIcon>
-                                        <ListItemText primary="Sexo" secondary={this.props.datos.sexo} />
+                                        <ListItemText primary="Sexo" secondary={this.props.usuario.sexo} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
                                         <ListItemIcon>
                                             <DriveEta />
                                         </ListItemIcon>
-                                        <ListItemText primary="Patentes" secondary={this.props.datos.patentes} />
+                                        <ListItemText primary="Patentes" secondary={this.props.usuario.patentes} />
                                     </ListItem>
                                     <Divider />
                                 </List>
@@ -86,28 +111,28 @@ class Perfil extends Component {
                                         <ListItemIcon>
                                             <Phone />
                                         </ListItemIcon>
-                                        <ListItemText primary="Teléfono" secondary={this.props.datos.telefono} />
+                                        <ListItemText primary="Teléfono" secondary={this.props.usuario.telefono} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
                                         <ListItemIcon>
                                             <Home />
                                         </ListItemIcon>
-                                        <ListItemText primary="Dirección" secondary={this.props.datos.direccion} />
+                                        <ListItemText primary="Dirección" secondary={this.props.usuario.direccion} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
                                         <ListItemIcon>
                                             <LocationCity />
                                         </ListItemIcon>
-                                        <ListItemText primary="Localidad" secondary={this.props.datos.localidad} />
+                                        <ListItemText primary="Localidad" secondary={this.props.usuario.localidad} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
                                         <ListItemIcon>
                                             <LocationOn />
                                         </ListItemIcon>
-                                        <ListItemText primary="Provincia" secondary={this.props.datos.provincia} />
+                                        <ListItemText primary="Provincia" secondary={this.props.usuario.provincia} />
                                     </ListItem>
                                     <Divider />
                                 </List>
@@ -136,11 +161,12 @@ const mapStateToProps = state => {
         id: "",
         datos: state.perfil.datos,
         foto: state.perfil.foto,
-        cargando: state.perfil.cargando,
+        cargando: state.usuario.cargando,
         error: state.perfil.error,
         textoDeError: state.perfil.textoDeError,
         mostrarDialog: state.cambiarContrasena.mostrarDialog,
         mostrarDialogEditarPerfil: state.editarUsuario.mostrarDialogEditarPerfil,
+        usuario: state.usuario.usuario,
     }
 }
 
@@ -152,6 +178,7 @@ const mapDispatchToProps = dispatch => {
         abrirDialogEditarPerfil: () => {dispatch(abrirDialogEditarPerfil())},
         cerrarDialogEditarPerfil: () => {dispatch(cerrarDialogEditarPerfil())},
         addPatente: (listaPatentes) => {dispatch(addPatente(listaPatentes))},
+        cargarUsuario: (id) => {dispatch(cargarUsuario(id))},
     }
 }
 

@@ -58,11 +58,11 @@ export const editarUsuario = (id, usuario, editar) => {
                 let texto = editar ? "Usuario actualizado exitosamente" : "Usuario creado exitosamente";
                 dispatch(enqueueSnackbar({message: texto, options: {variant: "success"}}));
                 if (editar) {
-                    dispatch(cargarUsuario(id));
                     dispatch(cerrarDialogEditarPerfil());
+                    dispatch(cargarUsuario(id));
                 }
                 else {
-                    dispatch(cargarUsuarios());
+                    // dispatch(cargarUsuarios());
                     dispatch(cerrarDialogEditar());
                 }
                 // dispatch(cargarUsuario(id));
