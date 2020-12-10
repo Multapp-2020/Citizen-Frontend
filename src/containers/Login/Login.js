@@ -51,7 +51,6 @@ class Login extends Component {
     }
 
     render() {
-        console.log(this.props)
         const iniciarSesion = (
             <Fragment>
                 <Grid item={true} xs={12}>

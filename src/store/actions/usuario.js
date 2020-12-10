@@ -36,10 +36,8 @@ export const cargarUsuario = (id) => {
         dispatch(cargarUsuarioStart());
         Axios.get("/getUsuario", params)
             .then(response => {
-                console.log(response);
                 dispatch(cargarUsuarioConExito(response.data));
             }).catch(error => {
-                console.log(error);
                 dispatch(cargarUsuarioConError(error));
                 dispatch(enqueueSnackbar({message: "Error al cargar usuario. Intente nuevamente", options: {variant: "error"}}));
             });

@@ -56,13 +56,11 @@ export const eliminarUsuario = (id) => {
         };
         Axios.delete("/deleteUsuario", params)
             .then(response => {
-                console.log(response);
                 dispatch(eliminarUsuarioConExito());
                 dispatch(enqueueSnackbar({message: "Usuario eliminado con éxito", options: {variant: "success"}}));
                 dispatch(cargarUsuarios());
                 dispatch(cerrarDialogEliminar());
             }).catch(error => {
-                console.log(error);
                 dispatch(eliminarUsuarioConError(error));
                 dispatch(enqueueSnackbar({message: "Error al eliminar usuario", options: {variant: "error"}}));
             });

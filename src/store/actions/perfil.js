@@ -29,7 +29,6 @@ export const cargarPerfil = () => {
             .then(response => {
                 dispatch(cargarPerfilConExito(response.data));
             }).catch(error => {
-                console.log(error);
                 dispatch(cargarPerfilConError(error));
                 dispatch(enqueueSnackbar({message: "No se pudieron obtener sus datos personales", options: {variant: "error"}}));
             });

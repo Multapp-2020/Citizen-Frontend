@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { abrirDialogCambiarContrasena, cerrarDialogCambiarContrasena } from "../../store/actions/cambiarContrasena";
 import { cargarPerfil } from "../../store/actions/perfil";
 import Notifier from "../Notifier/Notifier";
-//import EditarUsuario from "../EditarUsuario/EditarUsuario";
 import CrearUsuario from "../CrearUsuario/CrearUsuario";
 import { abrirDialogEditarPerfil, cerrarDialogEditarPerfil, addPatente } from "../../store/actions/editarUsuario";
 
@@ -16,9 +15,6 @@ class Perfil extends Component {
     }
 
     render() {
-
-        console.log('SE VAN A LOGUEAR LAS PROPS');
-        console.log(this.props);
 
         const theme = createMuiTheme();
 
@@ -123,7 +119,6 @@ class Perfil extends Component {
                                 <Edit />
                             </Fab>
                         </Tooltip>
-                        {/* <EditarUsuario open={this.props.mostrarDialog} onClose={this.props.cerrarDialogEditarPerfil} editar={true} /> */}
                         <CrearUsuario open={this.props.mostrarDialogEditarPerfil} onClose={this.props.cerrarDialogEditarPerfil} editar={true}/>
                     </Fragment>
                 : null}

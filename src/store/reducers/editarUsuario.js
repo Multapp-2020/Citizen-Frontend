@@ -14,7 +14,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ABRIR_DIALOG_PATENTES:
-            console.log('ENTRA EN EL REDUCER');
             return {
                 ...state,
                 mostrarDialogPatente: true,
@@ -65,13 +64,11 @@ const reducer = (state = initialState, action) => {
                 patentes: action.data
             };
         case actionTypes.ABRIR_DIALOG_EDITAR_PERFIL:
-            console.log('ENTRA AL REDUCER DE ABRIR')
             return {
                 ...state,
                 mostrarDialogEditarPerfil: true
             };
         case actionTypes.CERRAR_DIALOG_EDITAR_PERFIL:
-            console.log('ENTRA AL REDUCER DE CERRAR')
             return {
                 ...state,
                 mostrarDialogEditarPerfil: false

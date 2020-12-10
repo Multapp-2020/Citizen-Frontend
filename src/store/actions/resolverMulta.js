@@ -55,7 +55,6 @@ export const resolverMulta = (id, estado, razon) => {
                 dispatch(cerrarDialogResolver());
                 dispatch(cargarMulta(id));
             }).catch(error => {
-                console.log(error);
                 dispatch(resolverMultaConError(error.response.data.message));
                 dispatch(enqueueSnackbar({message: traducirError(error.response.data.message), options: {variant: "error"}}));
             });

@@ -118,15 +118,6 @@ const CrearUsuario = props => {
     }
 
     const editarPatentesHandler = () => {
-        // props.mostrarDialogPatente = true;
-        /* this.setState((state) => {
-            return {
-                ...state,
-                mostrarDialogPatente: true
-            }
-        }); */
-        // this.setState({mostrarDialogPatente: true});
-        // this.state.mostrarDialogPatente = true;
         props.abrirDialogPatentes();
         return
     }
@@ -151,14 +142,9 @@ const CrearUsuario = props => {
             provincia: provincia,
             patentes: patentes
         };
-        /* let id = props.editar ? props.usuario.id : "";
-        props.editarUsuario(id, usuario, props.editar); */
         let id = localStorage.getItem("uid");
         props.editarUsuario(id, usuario, props.editar);
     }
-
-    console.log('SE VAN A LOGUEAR LAS PROPS DE CREARUSUARIO.JS');
-    console.log(props);
 
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xl" fullWidth={true}>
@@ -169,23 +155,6 @@ const CrearUsuario = props => {
                 <DialogContentText>* Campos obligatorios. Pase el cursor sobre algunos campos para más información.</DialogContentText>
                 <Grid container={true} spacing={2}>
                     <Grid item={true} xs={12}>
-                        {/* <FormControl>
-                            <Tooltip title="La patente consta de 3 letras en mayúscula seguidas de 3 números. Se debe agregar como mínimo una patente, y como máximo se permiten 5">
-                                <TextField
-                                    id="patente"
-                                    type="text"
-                                    label="Patente"
-                                    value={unaPatente}
-                                    onChange={event => setUnaPatente(event.target.value)}
-                                />
-                            </Tooltip>
-                            <Button color="primary" onClick={unaPatenteHandler} disabled={patentes.length > 4}>
-                                Agregar  
-                            </Button>
-                            <Button color="primary" onClick={editarPatentesHandler} disabled={patentes.length > 4}>
-                                Editar  
-                            </Button>
-                        </FormControl> */}
                         <FormControl required={true} fullWidth={true}>
                             <TextField
                                 id="patentes"

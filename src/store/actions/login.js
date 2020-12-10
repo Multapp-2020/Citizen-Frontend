@@ -69,10 +69,8 @@ export const recuperarContrasena = (email) => {
         }
         Axios.post("/recuperarContrasena", data, headers)
             .then(response => {
-                console.log(response);
                 dispatch(recuperarContrasenaConExito());
             }).catch(error => {
-                console.log(error.response.data.message);
                 dispatch(loginConError(error.response.data.message));
             });
     }

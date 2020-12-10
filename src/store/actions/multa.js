@@ -36,10 +36,8 @@ export const cargarMulta = (id) => {
         dispatch(cargarMultaStart());
         Axios.get("/getMulta", params)
             .then(response => {
-                console.log(response);
                 dispatch(cargarMultaConExito(response.data));
             }).catch(error => {
-                console.log(error);
                 dispatch(cargarMultaConError(error));
                 dispatch(enqueueSnackbar({message: "Error al cargar multa. Intente nuevamente", options: {variant: "error"}}));
             });
