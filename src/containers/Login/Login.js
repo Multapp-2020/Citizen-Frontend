@@ -5,7 +5,7 @@ import { login, recuperarContrasena } from "../../store/actions/login";
 import { connect } from "react-redux";
 import { traducirError } from "../../share/traducirError";
 import { Redirect, withRouter } from "react-router";
-import { abrirDialogEditar, cerrarDialogEditar } from "../../store/actions/editarUsuario";
+import { abrirDialogEditar, cerrarDialogEditar, addPatente } from "../../store/actions/editarUsuario";
 import CrearUsuario from '../../components/CrearUsuario/CrearUsuario';
 
 class Login extends Component {
@@ -48,6 +48,11 @@ class Login extends Component {
     // carga lo que escribe el usuario en el state
     inputHandler = (event) => {
         this.setState({[event.target.id]: event.target.value});
+    }
+
+    handleRegistrateClick = () => {
+        this.props.abrirDialogEditar();
+        this.props.addPatente([null]);
     }
 
     render() {
@@ -94,7 +99,7 @@ class Login extends Component {
                     <Button
                         fullWidth={true}
                         color="primary"
-                        onClick={this.props.abrirDialogEditar}
+                        onClick={this.handleRegistrateClick}
                     >
                         Regístrate
                     </Button>
@@ -198,6 +203,7 @@ const mapDispatchToProps = dispatch => {
         recuperarContrasena: (email) => {dispatch(recuperarContrasena(email))},
         abrirDialogEditar: () => {dispatch(abrirDialogEditar())},
         cerrarDialogEditar: () => {dispatch(cerrarDialogEditar())},
+        addPatente: (listaPatentes) => {dispatch(addPatente(listaPatentes))},
     }
 }
 

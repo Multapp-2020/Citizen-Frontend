@@ -54,7 +54,7 @@ const CrearUsuario = props => {
             setUnaPatente(props.datos.unaPatente);
         }
         else {
-            setRol("Ciudadano");
+            /* setRol("Ciudadano");
             setDni("");
             setApellido("");
             setNombre("");
@@ -68,9 +68,9 @@ const CrearUsuario = props => {
             setProvincia("");
             setEmail("");
             setTelefono("");
-            setPatentes(props.patentes);
             setUnaPatente("");
-            setFoto([]);
+            setFoto([]); */
+            setPatentes(props.patentes);
         }
     }, [props.mostrarDialog, props.editar, props.patentes, props.mostrarDialogEditarPerfil]);
 
@@ -85,7 +85,8 @@ const CrearUsuario = props => {
             localidad.trim() !== "" &&
             provincia.trim() !== "" &&
             email.trim() !== "" &&
-            telefono.trim() !== ""
+            telefono.trim() !== "" && 
+            patentes.toString().trim() !== ""
         ) {
             setAceptable(true);
         }
@@ -120,7 +121,7 @@ const CrearUsuario = props => {
 
     // ejecuta la action para mandar todo al backend
     const editarUsuarioHandler = () => {
-        const usuario = {
+        let usuario = {
             rol: rol,
             email: email,
             telefono: telefono,
@@ -138,7 +139,17 @@ const CrearUsuario = props => {
             provincia: provincia,
             patentes: patentes
         };
+        // const usuarioObj = JSON.stringify(usuario.list, function (key, value) {return (value === undefined) ? "" : value});
+        for(let i in usuario) { 
+            if(usuario[i] === undefined) {
+                usuario[i] = '';
+            }
+        }
+        /* console.log('SE LOGUEA USUARIOOBJ');
+        console.log(usuarioObj); */
         let id = localStorage.getItem("uid");
+        console.log('SE LOGUEA USUARIO');
+        console.log(usuario);
         props.editarUsuario(id, usuario, props.editar);
         /* if (props.editar){
             // props.cerrarDialogEditarPerfil();
@@ -147,6 +158,30 @@ const CrearUsuario = props => {
             window.location.reload();
         } */
     }
+
+    const handleCancelarClick = () => {
+        props.onClose();
+        setRol("Ciudadano");
+        setDni("");
+        setApellido("");
+        setNombre("");
+        setFechaNacimiento(new Date().toISOString().slice(0, 10));
+        setSexo("Masculino");
+        setCalle("");
+        setNumero("");
+        setPiso("");
+        setDepartamento("");
+        setLocalidad("");
+        setProvincia("");
+        setEmail("");
+        setTelefono("");
+        setUnaPatente("");
+        setFoto([]);
+        setPatentes([null]);
+    }
+
+    console.log('PROPS DE CREARUSUARIO.JS');
+    console.log(props);
 
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xl" fullWidth={true}>
@@ -308,7 +343,7 @@ const CrearUsuario = props => {
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.onClose}>Cancelar</Button>
+                <Button onClick={handleCancelarClick}>Cancelar</Button>
                 <Button onClick={editarUsuarioHandler} color="primary" disabled={props.cargando || !aceptable}>
                     Aceptar
                     {props.cargando && <CircularProgress size={24} className={estilos.buttonProgress} />}
