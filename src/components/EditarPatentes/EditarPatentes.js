@@ -80,7 +80,7 @@ const EditarPatentes = props => {
 
     const handlePatenteChange = (index, value) => {
         const copy = [...patentes];
-        copy[index] = value;
+        copy[index] = value.toUpperCase();
         setPatentes(copy);
     }
 
@@ -89,6 +89,9 @@ const EditarPatentes = props => {
         copy.splice(index, 1);
         setPatentes(copy);
     }
+
+    const regex = /^[A-Z]{3}[0-9]{3}$/;
+    const regexNuevo = /^[A-Z]{2}[0-9]{3}[A-Z]{2}$/;
 
     const validForm = () => {
         const bool = hasDuplicates(patentes);
@@ -99,7 +102,12 @@ const EditarPatentes = props => {
             if (patentes[i] === null) {
                 return false;
             }
-            if (patentes[i].length !== 6){
+            if ((patentes[i].length < 6) || (patentes[i].length > 8)){
+                return false;
+            }
+            console.log('RESULTADO DEL REGEX:');
+            console.log(regex.test(patentes[i]));
+            if ((!(regex.test(patentes[i]))) && (!(regexNuevo.test(patentes[i])))) {
                 return false;
             }
         }
