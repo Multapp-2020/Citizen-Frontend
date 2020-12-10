@@ -26,6 +26,7 @@ const EditarPatentes = props => {
     const [aceptable, setAceptable] = useState(false);
     const [patentes, setPatentes] = useState([null]);
     const [singlePatente, setSinglePatente] = useState("");
+    const [deleteBtn, setDeleteBtn] = useState(true);
 
     const estilos = useStyles();
 
@@ -79,15 +80,32 @@ const EditarPatentes = props => {
     }
 
     const handlePatenteChange = (index, value) => {
+        // setDeleteBtn(validDelete());
         const copy = [...patentes];
         copy[index] = value.toUpperCase();
         setPatentes(copy);
+        /* const booleano = validDelete();
+        setDeleteBtn(booleano); */
     }
 
     const handlePatenteRemove = (index) => {
         const copy = [...patentes];
         copy.splice(index, 1);
         setPatentes(copy);
+        /* if ((patentes.length > 1) && (patentes[0] !== null) && (index === 0)){
+            console.log('ENTRA EN EL CONDICIONAL');
+            //var copy = Array.apply(null, Array(patentes.length - 1));
+            //for (let i=1; i<patentes.length; i++){
+                //copy[i-1] = patentes[i];
+            //}
+            const copy = patentes.slice(1, patentes.length);
+            console.log(copy);
+            setPatentes([null]);
+        } else {
+            const copy = [...patentes];
+            copy.splice(index, 1);
+            setPatentes(copy);
+        } */
     }
 
     const regex = /^[A-Z]{3}[0-9]{3}$/;
@@ -116,6 +134,20 @@ const EditarPatentes = props => {
         return (new Set(array)).size !== array.length;
     }
 
+    /* const validDelete = () => {
+        console.log('ENTRA A LA FUNCION')
+        var bool = true;
+        for (let i=1; i<patentes.length; i++){
+            if (patentes[i] !== null){
+                bool = false;
+            }
+        }
+        if ((patentes[0] !== null) && bool){
+            return true;
+        }
+        return false;
+    } */
+
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xs">
             <DialogTitle>
@@ -139,7 +171,7 @@ const EditarPatentes = props => {
                                                 onChange={(event) => handlePatenteChange(index, event.target.value)}
                                             />
                                         </Tooltip>
-                                        <IconButton onClick={() => handlePatenteRemove(index)} disabled={patentes.length === 1}>
+                                        <IconButton onClick={() => handlePatenteRemove(index)} disabled={index === 0}>
                                             <Delete />
                                         </IconButton>
                                     </ListItem>
