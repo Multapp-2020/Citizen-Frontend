@@ -22,7 +22,7 @@ class Multas extends Component {
 
     render() {
         let numeroDeMultasSinResolver = 0; // el numero total de multas que estan sin resolver
-        let textoDeMultasSinResolver = ""; // el texto que se va a mostrar debajo del h2 que da la bienvenida
+        // let textoDeMultasSinResolver = ""; // el texto que se va a mostrar debajo del h2 que da la bienvenida
 
         let multasFiltradas = this.props.multas.filter(multa => {
             let fecha = multa.fecha.split("/").reverse(); // convierte la fecha en dd/mm/aaaa a aaaa-mm-dd para comparar con los filtros
@@ -97,7 +97,7 @@ class Multas extends Component {
                 {this.props.cargando ? <CircularProgress /> : null}
                 {!this.props.cargando && !this.props.error ?
                     <Fragment>
-                        <Typography variant="h5">{textoDeMultasSinResolver}</Typography>
+                        {/* <Typography variant="h5">{textoDeMultasSinResolver}</Typography> */}
                         <Button variant="contained" color="primary" onClick={this.props.abrirDialogFiltro}>
                             Filtrar
                         </Button>
