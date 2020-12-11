@@ -8,6 +8,7 @@ const initialState = {
     estadoCambiado: false,
     errorAlModificarDatos: false,
     textoDeErrorAlModificarDatos: false,
+    fotoUsuario: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,7 @@ const reducer = (state = initialState, action) => {
                 usuario: action.usuario,
                 cargando: false,
                 errorAlCargar: false,
+                fotoUsuario: action.foto,
             };
         case actionTypes.CARGAR_USUARIO_CON_ERROR:
             return {

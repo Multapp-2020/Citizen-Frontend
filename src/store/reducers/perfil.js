@@ -11,6 +11,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.CARGAR_PERFIL_START:
+            console.log('ENTRA AL REDUCER');
+            return {
+                ...state,
+                cargando: true,
+            };
         case actionTypes.CARGAR_PERFIL_CON_EXITO:
             return {
                 ...state,

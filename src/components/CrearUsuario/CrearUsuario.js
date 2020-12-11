@@ -42,7 +42,12 @@ const CrearUsuario = props => {
             setNombre(props.usuario.nombre.split(" ")[0]);
             setFechaNacimiento(props.usuario.fechaNacimiento);
             setSexo(props.usuario.sexo);
-            setCalle(props.usuario.direccion);
+            if (props.usuario.numero == undefined){
+                let recorte = props.usuario.direccion
+                setCalle(recorte.replace(/S\/N/g,'').trim());
+            } else {
+                setCalle(props.usuario.direccion);
+            }
             setNumero(props.usuario.numero);
             setPiso(props.usuario.piso);
             setDepartamento(props.usuario.departamento);
@@ -82,7 +87,7 @@ const CrearUsuario = props => {
         console.log(props.patentes) */
         if ((
             dni.trim() !== "" &&
-            //apellido.trim() !== "" &&
+            apellido.trim() !== "" &&
             nombre.trim() !== "" &&
             fechaNacimiento.trim() !== "" &&
             calle.trim() !== "" &&
@@ -91,13 +96,13 @@ const CrearUsuario = props => {
             email.trim() !== "" &&
             telefono.trim() !== "" && 
             patentes.toString().trim() !== ""
-        ) && (props.usuario.patentes !== patentes)) {
+        ) ) {
             setAceptable(true);
         }
         else {
             setAceptable(false);
         }
-    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, patentes]);
+    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento]);
 
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {
@@ -155,6 +160,7 @@ const CrearUsuario = props => {
         console.log('SE LOGUEA USUARIO');
         console.log(usuario);
         props.editarUsuario(id, usuario, props.editar);
+        setAceptable(false);
         /* if (props.editar){
             // props.cerrarDialogEditarPerfil();
             // return <Redirect to='/perfil'  />

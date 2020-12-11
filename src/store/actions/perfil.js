@@ -2,6 +2,12 @@ import * as actionTypes from "./actionTypes";
 import Axios from "axios";
 import { enqueueSnackbar } from "./notifier";
 
+const cargarPerfilStart = () => {
+    return {
+        type: actionTypes.CARGAR_PERFIL_START,
+    }
+}
+
 const cargarPerfilConExito = (datos) => {
     return {
         type: actionTypes.CARGAR_PERFIL_CON_EXITO,
@@ -19,12 +25,13 @@ const cargarPerfilConError = (error) => {
 }
 
 export const cargarPerfil = () => {
+    const data = {
+        params: {
+            uid: localStorage.uid,
+        }
+    };
     return dispatch => {
-        const data = {
-            params: {
-                uid: localStorage.uid,
-            }
-        };
+        dispatch(cargarPerfilStart());
         Axios.get("/getPerfil", data)
             .then(response => {
                 dispatch(cargarPerfilConExito(response.data));

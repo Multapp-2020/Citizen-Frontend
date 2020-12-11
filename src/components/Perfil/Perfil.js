@@ -58,7 +58,7 @@ class Perfil extends Component {
                     <Fragment>
                         <Grid container={true} spacing={2}>
                             <Grid item={true} xs={12}>
-                                <Avatar style={{width: "200px", height: "200px"}} src={this.props.usuario.foto} alt={this.props.usuario.nombre} />
+                                <Avatar style={{width: "200px", height: "200px"}} src={this.props.fotoUsuario} alt={this.props.usuario.nombre} />
                             </Grid>
                             <Grid item={true} xs={12} style={{verticalAlign: "center"}}>
                                 <Typography variant="h2">
@@ -167,6 +167,7 @@ const mapStateToProps = state => {
         mostrarDialog: state.cambiarContrasena.mostrarDialog,
         mostrarDialogEditarPerfil: state.editarUsuario.mostrarDialogEditarPerfil,
         usuario: state.usuario.usuario,
+        fotoUsuario: state.usuario.fotoUsuario,
     }
 }
 

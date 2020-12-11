@@ -11,7 +11,9 @@ const cargarUsuarioStart = () => {
 const cargarUsuarioConExito = (usuario) => {
     return {
         type: actionTypes.CARGAR_USUARIO_CON_EXITO,
-        usuario: usuario,
+        id: usuario.id,
+        foto: usuario.foto,
+        usuario: usuario.datos,
     }
 }
 
@@ -29,12 +31,12 @@ export const cargarUsuario = (id) => {
             "Access-Control-Allow-Origin": "*",
         },
         params: {
-            id: id,
+            uid: id,
         },
     };
     return dispatch => {
         dispatch(cargarUsuarioStart());
-        Axios.get("/getUsuario", params)
+        Axios.get("/getPerfil", params)
             .then(response => {
                 dispatch(cargarUsuarioConExito(response.data));
             }).catch(error => {
