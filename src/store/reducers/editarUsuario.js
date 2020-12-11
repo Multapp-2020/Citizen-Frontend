@@ -8,7 +8,8 @@ const initialState = {
     error: false,
     textoDeError: "",
     patentes: [],
-    mostrarDialogEditarPerfil: false
+    mostrarDialogEditarPerfil: false,
+    fotoEditar: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 mostrarDialogPatente: true,
+            };
+        case actionTypes.FOTO_EDITAR_TRUE:
+            return {
+                ...state,
+                fotoEditar: true,
+            };
+        case actionTypes.FOTO_EDITAR_FALSE:
+            return {
+                ...state,
+                fotoEditar: false,
             };
         case actionTypes.CERRAR_DIALOG_PATENTES:
             return {

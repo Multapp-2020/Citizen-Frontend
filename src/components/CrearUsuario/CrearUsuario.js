@@ -86,10 +86,6 @@ const CrearUsuario = props => {
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
-        /* console.log('DATOS');
-        console.log(props.usuario);
-        console.log('PATENTES');
-        console.log(props.patentes) */
         if ((
             dni.trim() !== "" &&
             apellido.trim() !== "" &&
@@ -107,7 +103,7 @@ const CrearUsuario = props => {
         else {
             setAceptable(false);
         }
-    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento, foto]);
+    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento]);
 
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {
@@ -159,11 +155,7 @@ const CrearUsuario = props => {
                 usuario[i] = '';
             }
         }
-        /* console.log('SE LOGUEA USUARIOOBJ');
-        console.log(usuarioObj); */
         let id = localStorage.getItem("uid");
-        console.log('SE LOGUEA USUARIO');
-        console.log(usuario);
         props.editarUsuario(id, usuario, props.editar);
         setAceptable(false);
         /* if (props.editar){
@@ -194,9 +186,6 @@ const CrearUsuario = props => {
         setFoto([]);
         setPatentes([null]);
     }
-
-    console.log('PROPS DE CREARUSUARIO.JS');
-    console.log(props);
 
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xl" fullWidth={true}>

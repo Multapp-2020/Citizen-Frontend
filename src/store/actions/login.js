@@ -35,8 +35,6 @@ export const login = (email, password) => {
         }
         Axios.post("/sessionLogin", data, headers)
             .then(response => {
-                console.log('SE VA A LOGUEAR RESPONSE');
-                console.log(response);
                 if (response.data.rol !== "Ciudadano"){
                     // forzar error
                     throw "Usuario Inválido";

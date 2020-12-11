@@ -92,20 +92,6 @@ const EditarPatentes = props => {
         const copy = [...patentes];
         copy.splice(index, 1);
         setPatentes(copy);
-        /* if ((patentes.length > 1) && (patentes[0] !== null) && (index === 0)){
-            console.log('ENTRA EN EL CONDICIONAL');
-            //var copy = Array.apply(null, Array(patentes.length - 1));
-            //for (let i=1; i<patentes.length; i++){
-                //copy[i-1] = patentes[i];
-            //}
-            const copy = patentes.slice(1, patentes.length);
-            console.log(copy);
-            setPatentes([null]);
-        } else {
-            const copy = [...patentes];
-            copy.splice(index, 1);
-            setPatentes(copy);
-        } */
     }
 
     const regex = /^[A-Z]{3}[0-9]{3}$/;
@@ -133,20 +119,6 @@ const EditarPatentes = props => {
     const hasDuplicates = (array) => {
         return (new Set(array)).size !== array.length;
     }
-
-    /* const validDelete = () => {
-        console.log('ENTRA A LA FUNCION')
-        var bool = true;
-        for (let i=1; i<patentes.length; i++){
-            if (patentes[i] !== null){
-                bool = false;
-            }
-        }
-        if ((patentes[0] !== null) && bool){
-            return true;
-        }
-        return false;
-    } */
 
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xs">

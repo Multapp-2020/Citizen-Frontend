@@ -36,6 +36,18 @@ const editarUsuarioConError = (error) => {
     }
 }
 
+export const fotoEditarTrue = () => {
+    return {
+        type: actionTypes.FOTO_EDITAR_TRUE,
+    }
+}
+
+export const fotoEditarFalse = () => {
+    return {
+        type: actionTypes.FOTO_EDITAR_FALSE,
+    }
+}
+
 export const editarUsuario = (id, usuario, editar) => {
     return dispatch => {
         dispatch(editarUsuarioStart());

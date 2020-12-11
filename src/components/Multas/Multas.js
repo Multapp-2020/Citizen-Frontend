@@ -23,9 +23,6 @@ class Multas extends Component {
 
     render() {
 
-        console.log('PROPS DE MULTAS.JS');
-        console.log(this.props);
-
         let numeroDeMultasSinResolver = 0; // el numero total de multas que estan sin resolver
         // let textoDeMultasSinResolver = ""; // el texto que se va a mostrar debajo del h2 que da la bienvenida
 
