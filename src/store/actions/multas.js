@@ -16,6 +16,13 @@ const cargarMultasConError = (error) => {
     }
 }
 
+export const setMultaId = (multaId) => {
+    return {
+        type: actionTypes.SET_MULTA_ID,
+        id: multaId,
+    }
+}
+
 export const cargarMultas = () => {
     const params = {
         headers: {

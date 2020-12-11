@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Button, Typography, TableHead, TableRow, TableCell, Table, TableContainer, Paper, TableBody, CircularProgress, Container, Tooltip } from "@material-ui/core";
 import { Done, Warning, Clear } from "@material-ui/icons";
 import Filtro from "../Filtro/Filtro";
-import { cargarMultas } from "../../store/actions/multas";
+import { cargarMultas, setMultaId } from "../../store/actions/multas";
 import { connect } from 'react-redux';
 import { withSnackbar } from "notistack";
 import Notifier from "../Notifier/Notifier";
@@ -16,11 +16,16 @@ class Multas extends Component {
     }
 
     // metodo que carga todos los datos de una multa al hacer clic en una
-    multaSeleccionadaHandler = (id) => {
+    multaSeleccionadaHandler = (id, index) => {
+        this.props.setMultaId(index + 1);
         this.props.history.push("/multas/" + id);
     }
 
     render() {
+
+        console.log('PROPS DE MULTAS.JS');
+        console.log(this.props);
+
         let numeroDeMultasSinResolver = 0; // el numero total de multas que estan sin resolver
         // let textoDeMultasSinResolver = ""; // el texto que se va a mostrar debajo del h2 que da la bienvenida
 
@@ -63,8 +68,8 @@ class Multas extends Component {
             return seDebeMostrar;
         });
   
-        let multasParaMostrar = multasFiltradas.map(multa => (
-            <TableRow key={multa.id} hover={true} onClick={() => this.multaSeleccionadaHandler(multa.id)}>
+        let multasParaMostrar = multasFiltradas.map((multa, index) => (
+            <TableRow key={multa.id} hover={true} onClick={() => this.multaSeleccionadaHandler(multa.id, index)} style={{ cursor: 'pointer' }} >
                 <TableCell align="center">
                     <Tooltip title={multa.estado}>
                         {multa.estado === "No resuelta" ?
@@ -75,7 +80,7 @@ class Multas extends Component {
                         }
                     </Tooltip>
                 </TableCell>
-                <TableCell>{multa.id}</TableCell>
+                <TableCell>{index + 1}</TableCell>
                 <TableCell>{multa.dniConductor}</TableCell>
                 <TableCell>{multa.nombreConductor}</TableCell>
                 <TableCell>{multa.fecha}</TableCell>
@@ -139,6 +144,7 @@ const mapStateToProps = state => {
         desde: state.filtro.desde,
         hasta: state.filtro.hasta,
         dni: state.filtro.dni,
+        multaId: state.multas.multaId,
     }
 }
 
@@ -146,6 +152,7 @@ const mapDispatchToProps = dispatch => {
     return {
         cargarMultas: () => dispatch(cargarMultas()),
         abrirDialogFiltro: () => dispatch(abrirDialogFiltro()),
+        setMultaId: (index) => dispatch(setMultaId(index)),
     }
 }
 
