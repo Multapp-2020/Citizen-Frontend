@@ -83,13 +83,13 @@ class Multas extends Component {
             </TableRow>
         ));
         
-        if (numeroDeMultasSinResolver === 0) {
+        /* if (numeroDeMultasSinResolver === 0) {
             textoDeMultasSinResolver = "No quedan multas sin resolver";
         } else if (numeroDeMultasSinResolver === 1) {
             textoDeMultasSinResolver = "Tiene 1 multa sin resolver";
         } else {
             textoDeMultasSinResolver = "Tiene " + numeroDeMultasSinResolver + " multas sin resolver";
-        }
+        } */
   
         return (
             <Container maxWidth="lg" style={{minHeight: "100vh"}}>

@@ -36,22 +36,27 @@ const CrearUsuario = props => {
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
         if (props.editar) {
-            setRol(props.datos.rol);
-            setDni(props.datos.dni);
-            setApellido(props.datos.nombre.split(" ")[1]);
-            setNombre(props.datos.nombre.split(" ")[0]);
-            setFechaNacimiento(props.datos.fechaNacimiento);
-            setSexo(props.datos.sexo);
-            setCalle(props.datos.direccion);
-            setNumero(props.datos.numero);
-            setPiso(props.datos.piso);
-            setDepartamento(props.datos.departamento);
-            setLocalidad(props.datos.localidad);
-            setProvincia(props.datos.provincia);
-            setEmail(props.datos.email);
-            setTelefono(props.datos.telefono);
+            setRol(props.usuario.rol);
+            setDni(props.usuario.dni);
+            setApellido(props.usuario.nombre.split(" ")[1]);
+            setNombre(props.usuario.nombre.split(" ")[0]);
+            setFechaNacimiento(props.usuario.fechaNacimiento);
+            setSexo(props.usuario.sexo);
+            if (props.usuario.numero == undefined){
+                let recorte = props.usuario.direccion
+                setCalle(recorte.replace(/S\/N/g,'').trim());
+            } else {
+                setCalle(props.usuario.direccion);
+            }
+            setNumero(props.usuario.numero);
+            setPiso(props.usuario.piso);
+            setDepartamento(props.usuario.departamento);
+            setLocalidad(props.usuario.localidad);
+            setProvincia(props.usuario.provincia);
+            setEmail(props.usuario.email);
+            setTelefono(props.usuario.telefono);
             setPatentes(props.patentes);
-            setUnaPatente(props.datos.unaPatente);
+            setUnaPatente(props.usuario.unaPatente);
         }
         else {
             /* setRol("Ciudadano");
@@ -76,7 +81,11 @@ const CrearUsuario = props => {
 
     // evalua si se pueden aceptar los cambios al completar todos los campos obligatorios
     useEffect(() => {
-        if (
+        /* console.log('DATOS');
+        console.log(props.usuario);
+        console.log('PATENTES');
+        console.log(props.patentes) */
+        if ((
             dni.trim() !== "" &&
             apellido.trim() !== "" &&
             nombre.trim() !== "" &&
@@ -87,13 +96,13 @@ const CrearUsuario = props => {
             email.trim() !== "" &&
             telefono.trim() !== "" && 
             patentes.toString().trim() !== ""
-        ) {
+        ) ) {
             setAceptable(true);
         }
         else {
             setAceptable(false);
         }
-    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono]);
+    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento]);
 
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {
@@ -151,6 +160,7 @@ const CrearUsuario = props => {
         console.log('SE LOGUEA USUARIO');
         console.log(usuario);
         props.editarUsuario(id, usuario, props.editar);
+        setAceptable(false);
         /* if (props.editar){
             // props.cerrarDialogEditarPerfil();
             // return <Redirect to='/perfil'  />
