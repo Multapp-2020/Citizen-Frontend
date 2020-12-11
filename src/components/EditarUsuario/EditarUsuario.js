@@ -83,7 +83,7 @@ const EditarUsuario = props => {
         else {
             setAceptable(false);
         }
-    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono]);
+    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, foto]);
 
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {

@@ -36,27 +36,32 @@ const CrearUsuario = props => {
     // carga los datos del usuario a editar/todo vacio al abrir/cerrar el dialog
     useEffect(() => {
         if (props.editar) {
-            setRol(props.usuario.rol);
-            setDni(props.usuario.dni);
-            setApellido(props.usuario.nombre.split(" ")[1]);
-            setNombre(props.usuario.nombre.split(" ")[0]);
-            setFechaNacimiento(props.usuario.fechaNacimiento);
-            setSexo(props.usuario.sexo);
-            if (props.usuario.numero == undefined){
-                let recorte = props.usuario.direccion
-                setCalle(recorte.replace(/S\/N/g,'').trim());
-            } else {
-                setCalle(props.usuario.direccion);
+            if (props.datos){
+                setRol(props.datos.rol);
+                setDni(props.datos.dni);
+                setApellido(props.datos.apellido);
+                setNombre(props.datos.nombre);
+                setFechaNacimiento(props.datos.fechaNacimiento);
+                setSexo(props.datos.sexo);
+                /* if (props.datos.numero == undefined){
+                    let recorte = props.datos.direccion
+                    setCalle(recorte.replace(/S\/N/g,'').trim());
+                } else {
+                    setCalle(props.datos.direccion);
+                } */
+                const dir = props.usuario.direccion.split(" ")
+                dir.splice((dir.length - 1), 1);
+                setCalle(dir.join(' '));
+                setNumero(props.datos.numero);
+                setPiso(props.datos.piso);
+                setDepartamento(props.datos.departamento);
+                setLocalidad(props.datos.localidad);
+                setProvincia(props.datos.provincia);
+                setEmail(props.datos.email);
+                setTelefono(props.datos.telefono);
+                setPatentes(props.patentes);
+                setUnaPatente(props.datos.unaPatente);
             }
-            setNumero(props.usuario.numero);
-            setPiso(props.usuario.piso);
-            setDepartamento(props.usuario.departamento);
-            setLocalidad(props.usuario.localidad);
-            setProvincia(props.usuario.provincia);
-            setEmail(props.usuario.email);
-            setTelefono(props.usuario.telefono);
-            setPatentes(props.patentes);
-            setUnaPatente(props.usuario.unaPatente);
         }
         else {
             /* setRol("Ciudadano");
@@ -102,7 +107,7 @@ const CrearUsuario = props => {
         else {
             setAceptable(false);
         }
-    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento]);
+    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento, foto]);
 
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {

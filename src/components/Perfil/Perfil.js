@@ -23,7 +23,7 @@ class Perfil extends Component {
             this.props.cargarPerfil();
         } */
         // setCargando(true);
-        // this.props.cargarPerfil();
+        this.props.cargarPerfil();
         const id = localStorage.getItem("uid");
         this.props.cargarUsuario(id);
 
@@ -118,7 +118,7 @@ class Perfil extends Component {
                                         <ListItemIcon>
                                             <Home />
                                         </ListItemIcon>
-                                        <ListItemText primary="Dirección" secondary={this.props.usuario.direccion} />
+                                        <ListItemText primary="Dirección" secondary={this.props.datos.direccion} />
                                     </ListItem>
                                     <Divider />
                                     <ListItem>
