@@ -11,9 +11,7 @@ const cargarPerfilStart = () => {
 const cargarPerfilConExito = (datos) => {
     return {
         type: actionTypes.CARGAR_PERFIL_CON_EXITO,
-        id: datos.id,
-        datos: datos.datos,
-        foto: datos.foto,
+        datos: datos,
     }
 }
 
@@ -25,14 +23,23 @@ const cargarPerfilConError = (error) => {
 }
 
 export const cargarPerfil = () => {
-    const data = {
+    const params = {
+        headers: {
+            "content-type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+        params: {
+            id: localStorage.uid,
+        },
+    };
+    /* const data = {
         params: {
             uid: localStorage.uid,
         }
-    };
+    }; */
     return dispatch => {
         dispatch(cargarPerfilStart());
-        Axios.get("/getPerfil", data)
+        Axios.get("/getUsuario", params)
             .then(response => {
                 dispatch(cargarPerfilConExito(response.data));
             }).catch(error => {

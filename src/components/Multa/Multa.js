@@ -26,10 +26,7 @@ class Multa extends Component {
     }
 
     render() {
-
-        console.log('PROPS DE SINGLEMULTA.JS');
-        console.log(this.props);
-
+        
         return (
             <Fragment>
                 {this.props.cargando ? <CircularProgress /> : null}
