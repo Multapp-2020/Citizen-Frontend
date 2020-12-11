@@ -5,10 +5,16 @@ const initialState = {
     cargando: true,
     error: false,
     textoDeError: false,
+    multaId: 0,
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.SET_MULTA_ID:
+            return {
+                ...state,
+                multaId: action.id,
+            };
         case actionTypes.CARGAR_MULTAS_CON_EXITO:
             return {
                 ...state,

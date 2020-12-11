@@ -21,6 +21,7 @@ export const CARGAR_PERFIL_START = "CARGAR_PERFIL_START";
 // acciones de multas
 export const CARGAR_MULTAS_CON_EXITO = "CARGAR_MULTAS_CON_EXITO";
 export const CARGAR_MULTAS_CON_ERROR = "CARGAR_MULTAS_CON_ERROR";
+export const SET_MULTA_ID = "SET_MULTA_ID";
 
 // acciones de filtro
 export const ABRIR_DIALOG_FILTRO = "ABRIR_DIALOG_FILTRO";

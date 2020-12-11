@@ -26,13 +26,21 @@ class Multa extends Component {
     }
 
     render() {
+
+        console.log('PROPS DE SINGLEMULTA.JS');
+        console.log(this.props);
+
         return (
             <Fragment>
                 {this.props.cargando ? <CircularProgress /> : null}
                 {!this.props.cargando && !this.props.errorAlCargar ?
                     <Fragment>
                         <Container>
-                            <Typography variant="h3">Detalles de la multa con id. {this.props.multa.id}</Typography>
+                            {this.props.multaId > 0 ?
+                                <Typography variant="h3">Detalles de la multa con id. {this.props.multaId}</Typography>
+                            : 
+                            <Typography variant="h3">Detalles de multa</Typography>
+                            }
                             <Grid container={true} spacing={1}>
                                 <Grid item={true} xs={12}>
                                     <Paper elevation={3} className={estilos.GridItem}>
@@ -403,6 +411,7 @@ const mapStateToProps = state => {
         cargando: state.multa.cargando,
         errorAlCargar: state.multa.errorAlCargar,
         textoDeErrorAlCargar: state.multa.textoDeErrorAlCargar,
+        multaId: state.multas.multaId,
     }
 }
 
