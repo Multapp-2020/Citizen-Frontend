@@ -130,7 +130,7 @@ const EditarPatentes = props => {
                                                 onChange={(event) => handlePatenteChange(index, event.target.value)}
                                             />
                                         </Tooltip>
-                                        <IconButton onClick={() => handlePatenteRemove(index)} disabled={index === 0}>
+                                        <IconButton onClick={() => handlePatenteRemove(index)} disabled={patentes.length === 1}>
                                             <Delete />
                                         </IconButton>
                                     </ListItem>

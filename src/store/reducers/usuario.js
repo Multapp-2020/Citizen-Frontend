@@ -22,9 +22,9 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 usuario: action.usuario,
-                cargando: false,
-                errorAlCargar: false,
                 fotoUsuario: action.foto,
+                errorAlCargar: false,
+                cargando: false,
             };
         case actionTypes.CARGAR_USUARIO_CON_ERROR:
             return {

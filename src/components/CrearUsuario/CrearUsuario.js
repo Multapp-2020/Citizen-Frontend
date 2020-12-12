@@ -30,6 +30,7 @@ const CrearUsuario = props => {
     const [patentes, setPatentes] = useState([]);
     const [unaPatente, setUnaPatente] = useState("");
     const [aceptable, setAceptable] = useState(false);
+    const [fotoCargada, setFotoCargada] = useState(false);
 
     const estilos = useStyles();
 
@@ -103,7 +104,12 @@ const CrearUsuario = props => {
         else {
             setAceptable(false);
         }
-    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento]);
+    }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento, fotoCargada]);
+
+
+    useEffect(() => {
+        setAceptable(false);
+    }, [props.mostrarDialogEditarPerfil]);
 
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {
@@ -113,16 +119,19 @@ const CrearUsuario = props => {
     // carga la foto subida en el state
     const imageUploadHandler = (files) => {
         setFoto(files[0]);
+        if (files.length > 0){
+            setFotoCargada(true);
+        }
     }
 
     // Agrega una patente al array que se enviará al backend
-    const unaPatenteHandler = () => {
+    /* const unaPatenteHandler = () => {
         setPatentes([
             ...patentes,
             unaPatente
         ]);
         setUnaPatente("");
-    }
+    } */
 
     const editarPatentesHandler = () => {
         props.abrirDialogPatentes();
@@ -184,7 +193,8 @@ const CrearUsuario = props => {
         setTelefono("");
         setUnaPatente("");
         setFoto([]);
-        setPatentes([null]);
+        setPatentes([""]);
+        setFotoCargada(false);
     }
 
     return (
@@ -372,6 +382,7 @@ const mapStateToProps = state => {
         mostrarDialogPatente: state.editarUsuario.mostrarDialogPatente,
         patentes: state.editarUsuario.patentes,
         mostrarDialogEditarPerfil: state.editarUsuario.mostrarDialogEditarPerfil,
+        editado: state.editarUsuario.editado,
     }
 }
 
