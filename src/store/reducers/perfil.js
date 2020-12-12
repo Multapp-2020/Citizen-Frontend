@@ -19,12 +19,12 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CARGAR_PERFIL_CON_EXITO:
             return {
                 ...state,
-                id: action.id,
                 datos: action.datos,
+                id: action.id,
                 foto: action.foto,
-                cargando: false,
                 error: false,
                 textoDeError: "",
+                cargando: false,
             };
         case actionTypes.CARGAR_PERFIL_CON_ERROR:
             return {

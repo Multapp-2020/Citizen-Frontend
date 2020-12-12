@@ -10,11 +10,29 @@ import CrearUsuario from "../CrearUsuario/CrearUsuario";
 import { abrirDialogEditarPerfil, cerrarDialogEditarPerfil, addPatente } from "../../store/actions/editarUsuario";
 import { cargarUsuario } from "../../store/actions/usuario";
 
-class Perfil extends Component {
+const Perfil = props =>  {
 
     
+    
 
-    componentDidMount = () => {
+    //componentDidMount = async () => {
+
+        // fetchMyAPI()
+
+        /* async () => {
+            try {
+                
+                } catch (e) {
+                console.error(e);
+            }
+        } */
+
+        /* await this.props.cargarPerfil();
+        const id = localStorage.getItem("uid");
+        await this.props.cargarUsuario(id); */
+      
+        //fetchMyAPI(this);
+
         /* if (this.props.datos !== null){
             const id = localStorage.getItem("uid");
             this.props.cargarUsuario(id);
@@ -23,134 +41,143 @@ class Perfil extends Component {
             this.props.cargarPerfil();
         } */
         // setCargando(true);
-        this.props.cargarPerfil();
-        const id = localStorage.getItem("uid");
-        this.props.cargarUsuario(id);
+        
 
         // this.props.cargarPerfil();
 
         // setCargando(false);
         /* const id = localStorage.getItem("uid");
         this.props.cargarUsuario(id); */
+    //}
+
+    
+
+    useEffect(() => {
+        fetchMyAPI();
+    }, []);
+
+    useEffect(() => {
+        fetchMyAPI();
+    }, [props.editado]);
+
+   
+
+    async function fetchMyAPI() {
+        await props.cargarPerfil();
+        const id = localStorage.getItem("uid");
+        await props.cargarUsuario(id);
     }
 
-    /* useEffect(() => {
-        const id = localStorage.getItem("uid");
-        this.props.cargarUsuario(id);
-    }, [this.props.mostrarDialog]); */
+    const theme = createMuiTheme();
 
-    render() {
+    const handleEditClick = () => {
+        props.abrirDialogEditarPerfil();
+        props.addPatente(props.usuario.patentes);
+    }
 
-        const theme = createMuiTheme();
-
-        const handleEditClick = () => {
-            this.props.abrirDialogEditarPerfil();
-            this.props.addPatente(this.props.usuario.patentes);
-        }
-
-        return (
-            <Container>
-                {this.props.cargando ? <CircularProgress /> : null}
-                {!this.props.cargando && !this.props.error ?
-                    <Fragment>
-                        <Grid container={true} spacing={2}>
-                            <Grid item={true} xs={12}>
-                                <Avatar style={{width: "200px", height: "200px"}} src={this.props.fotoUsuario} alt={this.props.usuario.nombre} />
-                            </Grid>
-                            <Grid item={true} xs={12} style={{verticalAlign: "center"}}>
-                                <Typography variant="h2">
-                                    {this.props.usuario.nombre}
-                                </Typography>
-                                {/* <Typography variant="h4">{this.props.datos.rol}</Typography> */}
-                            </Grid>
-                            <Grid item={true} xs={6}>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Email />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Correo electrónico" secondary={this.props.usuario.email} />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Fingerprint />
-                                        </ListItemIcon>
-                                        <ListItemText primary="DNI" secondary={this.props.usuario.dni} />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Event />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Fecha de nacimiento" secondary={this.props.usuario.fechaNacimiento} />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Wc />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Sexo" secondary={this.props.usuario.sexo} />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <DriveEta />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Patentes" secondary={this.props.usuario.patentes} />
-                                    </ListItem>
-                                    <Divider />
-                                </List>
-                            </Grid>
-                            <Grid item={true} xs={6}>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Phone />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Teléfono" secondary={this.props.usuario.telefono} />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Home />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Dirección" secondary={this.props.datos.direccion} />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <LocationCity />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Localidad" secondary={this.props.usuario.localidad} />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <LocationOn />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Provincia" secondary={this.props.usuario.provincia} />
-                                    </ListItem>
-                                    <Divider />
-                                </List>
-                            </Grid>
-                            <Grid item={true} xs={12}>
-                                <Button variant="contained" color="primary" onClick={this.props.abrirDialogCambiarContrasena}>Cambiar contraseña</Button>
-                            </Grid>
+    return (
+        <Container>
+            {props.cargando ? <CircularProgress /> : null}
+            {!props.cargando && !props.error ?
+                <Fragment>
+                    <Grid container={true} spacing={2}>
+                        <Grid item={true} xs={12}>
+                            <Avatar style={{width: "200px", height: "200px"}} src={props.fotoUsuario} alt={props.usuario.nombre} />
                         </Grid>
-                        <CambiarContrasena open={this.props.mostrarDialog} onClose={this.props.cerrarDialogCambiarContrasena} />
-                        <Tooltip title="Editar datos" placement="left" arrow>
-                            <Fab color="primary" onClick={handleEditClick} style={{position: "fixed", bottom: theme.spacing(5), right: theme.spacing(5)}}>
-                                <Edit />
-                            </Fab>
-                        </Tooltip>
-                        <CrearUsuario open={this.props.mostrarDialogEditarPerfil} onClose={this.props.cerrarDialogEditarPerfil} editar={true}/>
-                    </Fragment>
-                : null}
-                <Notifier />
-            </Container>
-        );
-    };
+                        <Grid item={true} xs={12} style={{verticalAlign: "center"}}>
+                            <Typography variant="h2">
+                                {props.usuario.nombre}
+                            </Typography>
+                            {/* <Typography variant="h4">{props.datos.rol}</Typography> */}
+                        </Grid>
+                        <Grid item={true} xs={6}>
+                            <List>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <Email />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Correo electrónico" secondary={props.usuario.email} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <Fingerprint />
+                                    </ListItemIcon>
+                                    <ListItemText primary="DNI" secondary={props.usuario.dni} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <Event />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Fecha de nacimiento" secondary={props.usuario.fechaNacimiento} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <Wc />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Sexo" secondary={props.usuario.sexo} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <DriveEta />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Patentes" secondary={props.usuario.patentes} />
+                                </ListItem>
+                                <Divider />
+                            </List>
+                        </Grid>
+                        <Grid item={true} xs={6}>
+                            <List>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <Phone />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Teléfono" secondary={props.usuario.telefono} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <Home />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Dirección" secondary={props.datos.direccion} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <LocationCity />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Localidad" secondary={props.usuario.localidad} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <LocationOn />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Provincia" secondary={props.usuario.provincia} />
+                                </ListItem>
+                                <Divider />
+                            </List>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <Button variant="contained" color="primary" onClick={props.abrirDialogCambiarContrasena}>Cambiar contraseña</Button>
+                        </Grid>
+                    </Grid>
+                    <CambiarContrasena open={props.mostrarDialog} onClose={props.cerrarDialogCambiarContrasena} />
+                    <Tooltip title="Editar datos" placement="left" arrow>
+                        <Fab color="primary" onClick={handleEditClick} style={{position: "fixed", bottom: theme.spacing(5), right: theme.spacing(5)}}>
+                            <Edit />
+                        </Fab>
+                    </Tooltip>
+                    <CrearUsuario open={props.mostrarDialogEditarPerfil} onClose={props.cerrarDialogEditarPerfil} editar={true}/>
+                </Fragment>
+            : null}
+            <Notifier />
+        </Container>
+    );
+    
 }
 
 const mapStateToProps = state => {
@@ -165,6 +192,7 @@ const mapStateToProps = state => {
         mostrarDialogEditarPerfil: state.editarUsuario.mostrarDialogEditarPerfil,
         usuario: state.usuario.usuario,
         fotoUsuario: state.usuario.fotoUsuario,
+        editado: state.editarUsuario.editado,
     }
 }
 

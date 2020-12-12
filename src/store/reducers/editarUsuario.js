@@ -10,6 +10,7 @@ const initialState = {
     patentes: [],
     mostrarDialogEditarPerfil: false,
     fotoEditar: false,
+    editado: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -54,12 +55,21 @@ const reducer = (state = initialState, action) => {
                 cargando: true,
             };
         case actionTypes.EDITAR_USUARIO_CON_EXITO:
+            let switcher;
+            if (state.editado === false) {
+                switcher = true;
+            } else {
+                if (state.editado === true) {
+                    switcher = false;
+                }
+            }
             return {
                 ...state,
                 cargando: false,
                 exito: true,
                 error: false,
                 textoDeError: "",
+                editado: switcher,
             };
         case actionTypes.EDITAR_USUARIO_CON_ERROR:
             return {

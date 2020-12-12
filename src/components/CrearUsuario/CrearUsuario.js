@@ -106,6 +106,11 @@ const CrearUsuario = props => {
         }
     }, [rol, dni, apellido, nombre, fechaNacimiento, calle, localidad, provincia, email, telefono, props.patentes, numero, piso, departamento, fotoCargada]);
 
+
+    useEffect(() => {
+        setAceptable(false);
+    }, [props.mostrarDialogEditarPerfil]);
+
     // carga el radio que selecciona el usuario en el state
     const radioHandler = (event) => {
         setSexo(event.target.value);
@@ -113,8 +118,6 @@ const CrearUsuario = props => {
 
     // carga la foto subida en el state
     const imageUploadHandler = (files) => {
-        console.log('CONTENIDO DE FILES');
-        console.log(files);
         setFoto(files[0]);
         if (files.length > 0){
             setFotoCargada(true);
@@ -122,13 +125,13 @@ const CrearUsuario = props => {
     }
 
     // Agrega una patente al array que se enviará al backend
-    const unaPatenteHandler = () => {
+    /* const unaPatenteHandler = () => {
         setPatentes([
             ...patentes,
             unaPatente
         ]);
         setUnaPatente("");
-    }
+    } */
 
     const editarPatentesHandler = () => {
         props.abrirDialogPatentes();
@@ -193,9 +196,6 @@ const CrearUsuario = props => {
         setPatentes([""]);
         setFotoCargada(false);
     }
-
-    console.log('PROPS DE CREARUSUARIO.JS');
-    console.log(props);
 
     return (
         <Dialog open={props.open} onClose={props.onClose} maxWidth="xl" fullWidth={true}>
@@ -352,7 +352,6 @@ const CrearUsuario = props => {
                                 acceptedFiles={["image/*"]}
                                 filesLimit={1}
                                 onChange={imageUploadHandler.bind(this)}
-                                onClick={console.log('CLICK EN EL COSO DE IMAGEN')}
                             />
                         </FormControl>
                         <EditarPatentes open={props.mostrarDialogPatente} onClose={props.cerrarDialogPatentes} editar={false} />
@@ -383,6 +382,7 @@ const mapStateToProps = state => {
         mostrarDialogPatente: state.editarUsuario.mostrarDialogPatente,
         patentes: state.editarUsuario.patentes,
         mostrarDialogEditarPerfil: state.editarUsuario.mostrarDialogEditarPerfil,
+        editado: state.editarUsuario.editado,
     }
 }
 
