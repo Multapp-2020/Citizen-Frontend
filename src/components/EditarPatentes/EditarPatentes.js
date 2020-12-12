@@ -9,22 +9,8 @@ import Notifier from "../Notifier/Notifier";
 import useStyles from "../../share/useStyles";
 
 const EditarPatentes = props => {
-    /* const [dni, setDni] = useState("");
-    const [apellido, setApellido] = useState("");
-    const [nombre, setNombre] = useState("");
-    const [fechaNacimiento, setFechaNacimiento] = useState(new Date().toISOString().slice(0, 10));
-    const [sexo, setSexo] = useState("Masculino");
-    const [calle, setCalle] = useState("");
-    const [numero, setNumero] = useState("");
-    const [piso, setPiso] = useState("");
-    const [departamento, setDepartamento] = useState("");
-    const [localidad, setLocalidad] = useState("");
-    const [provincia, setProvincia] = useState("");
-    const [email, setEmail] = useState("");
-    const [telefono, setTelefono] = useState("");
-    const [foto, setFoto] = useState([]); */
     const [aceptable, setAceptable] = useState(false);
-    const [patentes, setPatentes] = useState([null]);
+    const [patentes, setPatentes] = useState([""]);
     const [singlePatente, setSinglePatente] = useState("");
     const [deleteBtn, setDeleteBtn] = useState(true);
 
@@ -47,7 +33,7 @@ const EditarPatentes = props => {
                     setPatentes(props.patentes);
                 }
             } else {
-                setPatentes([null]);
+                setPatentes([""]);
                 setSinglePatente("");
             }
         }
@@ -75,21 +61,19 @@ const EditarPatentes = props => {
     const addFieldPatente = () => {
         setPatentes([
             ...patentes,
-            null
+            ""
         ]);
     }
 
     const handlePatenteChange = (index, value) => {
-        // setDeleteBtn(validDelete());
         const copy = [...patentes];
         copy[index] = value.toUpperCase();
         setPatentes(copy);
-        /* const booleano = validDelete();
-        setDeleteBtn(booleano); */
     }
 
     const handlePatenteRemove = (index) => {
         const copy = [...patentes];
+        copy[index] = "";
         copy.splice(index, 1);
         setPatentes(copy);
     }
@@ -102,8 +86,11 @@ const EditarPatentes = props => {
         if (bool) {
             return false
         }
-        for (let i=0; i<patentes.length; i++){
+        for (let i=0; i<patentes.length; i++) {
             if (patentes[i] === null) {
+                return false;
+            }
+            if (patentes[i] === "") {
                 return false;
             }
             if ((patentes[i].length < 6) || (patentes[i].length > 8)){
@@ -135,7 +122,7 @@ const EditarPatentes = props => {
                                     <ListItem>
                                         <Tooltip title="Ejemplos de formatos permitidos: AAA000, AA000AB">
                                             <TextField
-                                                id={index}
+                                                id="patente"
                                                 type="text"
                                                 label="Patente"
                                                 required={true}
