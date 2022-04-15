@@ -142,7 +142,7 @@ const Perfil = props =>  {
                                     <ListItemIcon>
                                         <Home />
                                     </ListItemIcon>
-                                    <ListItemText primary="Dirección" secondary={props.datos.direccion} />
+                                    <ListItemText primary="Dirección" secondary={props.usuario.direccion} />
                                 </ListItem>
                                 <Divider />
                                 <ListItem>
