@@ -14,6 +14,7 @@ const cargarUsuarioConExito = (usuario) => {
         id: usuario.id,
         foto: usuario.foto,
         usuario: usuario.datos,
+        patentes: usuario.patentes
     }
 }
 
