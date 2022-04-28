@@ -19,6 +19,8 @@ export const traducirError = (error) => {
             return "Ya existe un usuario con el número de teléfono ingresado";
         case "auth/invalid-phone-number":
             return "El número de teléfono no tiene el formato indicado";
+        case "auth/user-disabled":
+            return "Usted se encuentra desactivado del sistema. Contacte su administrador.";
         default:
             return "Ocurrió un error. Intente nuevamente";
     }
