@@ -313,20 +313,12 @@ class Multa extends Component {
                                         </Typography>
                                         <Grid container={true} spacing={3}>
                                             <Grid item={true} xs={6}>
-                                                <Typography variant="overline">Primer vencimiento</Typography>
-                                                <Typography variant="body2">{this.props.multa.vencimientos.fechaPrimerVencimiento}</Typography>
+                                                <Typography variant="overline">Monto Primer vencimiento</Typography>
+                                                <Typography variant="body2">{this.props.multa.infraccion.unidadesFijasMin} [UF]</Typography>
                                             </Grid>
                                             <Grid item={true} xs={6}>
-                                                <Typography variant="overline">Monto</Typography>
-                                                <Typography variant="body2">${this.props.multa.vencimientos.montoPrimerVencimiento}</Typography>
-                                            </Grid>
-                                            <Grid item={true} xs={6}>
-                                                <Typography variant="overline">Segundo vencimiento</Typography>
-                                                <Typography variant="body2">{this.props.multa.vencimientos.fechaSegundoVencimiento}</Typography>
-                                            </Grid>
-                                            <Grid item={true} xs={6}>
-                                                <Typography variant="overline">Monto</Typography>
-                                                <Typography variant="body2">${this.props.multa.vencimientos.montoSegundoVencimiento}</Typography>
+                                                <Typography variant="overline">Monto segundo vencimiento</Typography>
+                                                <Typography variant="body2">${this.props.multa.infraccion.unidadesFijasMax} [UF]</Typography>
                                             </Grid>
                                         </Grid>
                                     </Paper>
