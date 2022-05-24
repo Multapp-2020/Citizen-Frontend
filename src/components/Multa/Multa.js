@@ -318,7 +318,7 @@ class Multa extends Component {
                                             </Grid>
                                             <Grid item={true} xs={6}>
                                                 <Typography variant="overline">Monto segundo vencimiento</Typography>
-                                                <Typography variant="body2">${this.props.multa.infraccion.unidadesFijasMax} [UF]</Typography>
+                                                <Typography variant="body2">{this.props.multa.infraccion.unidadesFijasMax} [UF]</Typography>
                                             </Grid>
                                         </Grid>
                                     </Paper>
