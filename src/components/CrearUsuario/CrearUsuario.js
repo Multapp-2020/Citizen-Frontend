@@ -231,6 +231,7 @@ const CrearUsuario = props => {
                                     id="dni"
                                     type="number"
                                     label="DNI"
+                                    inputProps={{ min: 10000000 }}
                                     required={true}
                                     value={dni}
                                     onChange={event => setDni(event.target.value)}
