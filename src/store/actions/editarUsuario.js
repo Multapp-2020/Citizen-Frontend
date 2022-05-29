@@ -67,7 +67,7 @@ export const editarUsuario = (id, usuario, editar) => {
         Axios.post(url, data, headers)
             .then(response => {
                 dispatch(editarUsuarioConExito());
-                let texto = editar ? "Usuario actualizado exitosamente" : "Usuario creado exitosamente";
+                let texto = editar ? "Usuario actualizado correctamente" : "Usuario creado correctamente";
                 dispatch(enqueueSnackbar({message: texto, options: {variant: "success"}}));
                 if (editar) {
                     dispatch(cerrarDialogEditarPerfil());

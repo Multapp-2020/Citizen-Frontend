@@ -50,7 +50,7 @@ export const cambiarContrasena = (contrasenaActual, contrasenaNueva) => {
             .then(response => {
                 dispatch(cambiarContrasenaConExito());
                 dispatch(cerrarDialogCambiarContrasena());
-                dispatch(enqueueSnackbar({message: "Contraseña cambiada exitosamente", options: {variant: "success"}}));
+                dispatch(enqueueSnackbar({message: "Contraseña cambiada correctamente", options: {variant: "success"}}));
             }).catch(error => {
                 dispatch(cambiarContrasenaConError(error));
                 dispatch(enqueueSnackbar({message: traducirError(error.response.data.message), options: {variant: "error"}}));
