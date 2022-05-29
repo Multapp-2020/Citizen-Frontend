@@ -69,6 +69,8 @@ const EditarUsuario = props => {
         if (
             rol.trim() !== "" &&
             dni.trim() !== "" &&
+            dni.length >= 8 &&
+            (dni % 1 == 0) &&
             apellido.trim() !== "" &&
             nombre.trim() !== "" &&
             fechaNacimiento.trim() !== "" &&
