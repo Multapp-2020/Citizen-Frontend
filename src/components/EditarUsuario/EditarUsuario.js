@@ -213,6 +213,7 @@ const EditarUsuario = props => {
                                     id="piso"
                                     type="text"
                                     label="Piso"
+                                    inputProps={{ min: 0 }}
                                     value={piso}
                                     onChange={event => setPiso(event.target.value)}
                                 />
